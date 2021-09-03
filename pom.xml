@@ -19,9 +19,6 @@
         <admin.password>$2a$04$oQo44vqcDIFRoYKiAXoNheurzkwX9dcNmowvTX/hsWuBMwijqn44i
         </admin.password>
         <db.driver>org.postgresql.Driver</db.driver>
-        <!--<db.database.url>jdbc-url-to-db</db.database.url>
-        <db.user>db-user</db.user>
-        <db.password>db-password</db.password>-->
         <java.version>1.8</java.version>
         <junit.version>5.7.0</junit.version>
         <spring-security-version>5.1.5.RELEASE</spring-security-version>
