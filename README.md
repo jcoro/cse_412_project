@@ -40,6 +40,12 @@ This way, we can keep all sensitive data out of version control.
 ![Maven Global Settings](https://github.com/jcoro/cse_412_project/blob/master/src/main/angularclient/src/assets/images/4.png?raw=true)
 
 ## Step 4 - Launch Spring Boot
+Before lanching Spring Boot, open maven tab on the right
+1) Choose cse_412_project
+2) Choose Lifecycle
+3) Double click install or package to install all the maven packages in pom.xml files
+![Install Maven Packges](https:github.com/jcoro/cse_412_project/blob/master/src/main/angularclient/src/assets/images/7.png?raw=true)
+
 The entry point for the Spring Boot application is in:
 `src/main/java/com/example/cse_412_project/Cse412ProjectApplication.java`
 
