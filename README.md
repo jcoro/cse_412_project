@@ -28,6 +28,8 @@ will are put in `settings.xml`
 ![settings.xml](https://github.com/jcoro/cse_412_project/blob/master/src/main/angularclient/src/assets/images/2.png?raw=true)
 
 IntelliJ lets you easily access this file:
+1) Right click on pom.xml file
+2) Hover over Maven and choose create `settings.xml`
 
 ![Access settings.xml](https://github.com/jcoro/cse_412_project/blob/master/src/main/angularclient/src/assets/images/3.png?raw=true)
 
