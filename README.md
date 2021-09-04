@@ -46,6 +46,8 @@ The entry point for the Spring Boot application is in:
 The Spring Boot application is basically a REST service which the Angular client accesses, so keep it running in IntelliJ.
 
 ## Step 5 - Launch the Angular Client
-Open a terminal at the directory in the application called: `angularclient` and type: `ng serve --open` to launch the Angular app.
+Open a terminal at the directory in the application called: `angularclient` 
+1) Type `npm install` to install all the needed packages
+2) Type: `ng serve` to launch the Angular app
 ![terminal](https://github.com/jcoro/cse_412_project/blob/master/src/main/angularclient/src/assets/images/6.png?raw=true)
 
