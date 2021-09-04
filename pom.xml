@@ -20,8 +20,9 @@
         </admin.password>
         <db.driver>org.postgresql.Driver</db.driver>
         <java.version>1.8</java.version>
-        <junit.version>5.7.0</junit.version>
-        <spring-security-version>5.1.5.RELEASE</spring-security-version>
+        <junit.version>5.7.2</junit.version>
+        <thymeleaf.version>3.0.12.RELEASE</thymeleaf.version>
+        <spring-security-version>5.5.1</spring-security-version>
     </properties>
 
     <dependencies>
@@ -97,13 +98,13 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.15</version>
+            <version>42.2.23.jre7</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.5.5.Final</version>
+            <version>5.5.7.Final</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
@@ -123,7 +124,7 @@
         <dependency>
             <groupId>nz.net.ultraq.thymeleaf</groupId>
             <artifactId>thymeleaf-layout-dialect</artifactId>
-            <version>2.5.3</version>
+            <version>3.0.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
