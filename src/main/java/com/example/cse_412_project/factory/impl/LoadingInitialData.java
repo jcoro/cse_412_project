@@ -30,7 +30,7 @@ public class LoadingInitialData implements CommandLineRunner {
         });
     }
 
-    public List<FoodDescription> parseFoodDescription(String filePath) {
+    private List<FoodDescription> parseFoodDescription(String filePath) {
         List<FoodDescription> list = new LinkedList<>();
         String line = "";
         try {
