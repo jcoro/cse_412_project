@@ -12,7 +12,7 @@ public class FoodDescription {
     private int ndbNo;
 
     @Column(name = "FdGrp_Cd")
-    private String fdGrpCd;
+    private int fdGrpCd;
 
     @Column(name = "Long_Desc")
     private String longDesc;
@@ -37,11 +37,11 @@ public class FoodDescription {
         this.ndbNo = NDB_No;
     }
 
-    public String getFdGrpCd() {
+    public int getFdGrpCd() {
         return fdGrpCd;
     }
 
-    public void setFdGrpCd(String fdGrpCd) {
+    public void setFdGrpCd(int fdGrpCd) {
         this.fdGrpCd = fdGrpCd;
     }
 
