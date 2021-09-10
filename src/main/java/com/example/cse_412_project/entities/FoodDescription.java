@@ -21,7 +21,7 @@ public class FoodDescription {
     private String shortDesc;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodDescription", cascade = CascadeType.DETACH)
-    private List<NutData> nutDataList;
+    private List<NutrientData> nutDataList;
 
     // todo: Missing Weight
 
@@ -61,11 +61,11 @@ public class FoodDescription {
         this.shortDesc = shortDesc;
     }
 
-    public List<NutData> getNutDataList() {
+    public List<NutrientData> getNutDataList() {
         return nutDataList;
     }
 
-    public void setNutDataList(List<NutData> nutDataList) {
+    public void setNutDataList(List<NutrientData> nutDataList) {
         this.nutDataList = nutDataList;
     }
 }
