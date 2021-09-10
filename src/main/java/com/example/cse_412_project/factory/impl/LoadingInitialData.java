@@ -1,24 +1,34 @@
-package com.example.cse_412_project.service.impl;
+package com.example.cse_412_project.factory.impl;
 
 import com.example.cse_412_project.entities.FoodDescription;
 import com.example.cse_412_project.repositories.FoodDescriptionRepository;
-import com.example.cse_412_project.service.ParseDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-@Transactional
-@Service
-public class ParseDataServiceImpl implements ParseDataService {
-
+@Component
+public class LoadingInitialData implements CommandLineRunner {
     @Autowired
-    private FoodDescriptionRepository foodDescriptionRepository;
+    FoodDescriptionRepository foodDescriptionRepository;
+
+    @Override
+    public void run(String...args) throws Exception {
+        List<FoodDescription> foodDescriptions = parseFoodDescription("Place Holder For Now");
+        foodDescriptions.forEach(foodDes -> {
+            Optional<FoodDescription> foodDescription = foodDescriptionRepository.findByNdbNo(foodDes.getNdbNo());
+            if (!foodDescription.isPresent()) {
+                foodDescriptionRepository.save(foodDes);
+            }
+        });
+    }
 
     public List<FoodDescription> parseFoodDescription(String filePath) {
         List<FoodDescription> list = new LinkedList<>();
@@ -34,17 +44,12 @@ public class ParseDataServiceImpl implements ParseDataService {
                 foodDescription.setShortDesc(getActualData(foodDesFields[3]));
                 list.add(foodDescription);
             }
-            list.forEach(foodDes -> {
-                Optional<FoodDescription> foodDescription = foodDescriptionRepository.findByNdbNo(foodDes.getNdbNo());
-                if (!foodDescription.isPresent()) {
-                    foodDescriptionRepository.save(foodDes);
-                }
-            });
         } catch (IOException e) {
             e.printStackTrace();
         }
         return list;
     }
+
     private String getActualData(String foodDesField) {
         if (foodDesField.equals("^^") || foodDesField.equals("~~")) {
             return null;
