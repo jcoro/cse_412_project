@@ -3,10 +3,11 @@ package com.example.cse_412_project.factory.impl;
 import com.example.cse_412_project.entities.FoodDescription;
 import com.example.cse_412_project.entities.NutDataKey;
 import com.example.cse_412_project.entities.NutrientData;
-import com.example.cse_412_project.exceptions.FoodDescriptionNotFoundException;
+import com.example.cse_412_project.entities.NutrientDefinition;
 import com.example.cse_412_project.repositories.FoodDescriptionRepository;
 import com.example.cse_412_project.repositories.NutrientDataRepository;
-import com.example.cse_412_project.service.ParseDataService;
+import com.example.cse_412_project.repositories.NutrientDefinitionRepository;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -18,14 +19,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import org.slf4j.Logger;
 
 @Component
 public class LoadingInitialData implements CommandLineRunner {
     @Autowired
-    FoodDescriptionRepository foodDescriptionRepository;
+    private FoodDescriptionRepository foodDescriptionRepository;
+
+    @Autowired
+    private NutrientDefinitionRepository nutrientDefinitionRepository;
 
     @Autowired
     private NutrientDataRepository nutrientDataRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(LoadingInitialData.class);
 
     @Override
     public void run(String...args) throws Exception {
@@ -36,21 +43,43 @@ public class LoadingInitialData implements CommandLineRunner {
                 foodDescriptionRepository.save(foodDes);
             }
         });
+        logger.info("Completed parsing Food Description");
 
-        List<NutrientData> nutrientData = parseNutrientData("Placeholder for now");
-        for (NutrientData nutrientData : list) {
+        List<NutrientData> listOfNutrientData = parseNutrientData("Placeholder for now");
+        for (NutrientData nutrientData : listOfNutrientData) {
+            boolean foodDesExist = false, nutrientDefExist = false;
             final int ndbNo = nutrientData.getNutDataKey().getNdbNo();
             Optional<FoodDescription> foodDescription = foodDescriptionRepository.findByNdbNo(ndbNo);
             if (!foodDescription.isPresent()) {
-                throw new FoodDescriptionNotFoundException(String.format("Food description with nbdNo (%d) does not exist", ndbNo));
+                logger.error(String.format("Food description with nbdNo (%d) does not exist", ndbNo));
+            } else {
+                foodDesExist = true;
             }
-            foodDescription.get().getNutDataList().add(nutrientData);
+            final int nutrNo = nutrientData.getNutDataKey().getNutrNo();
+            Optional<NutrientDefinition> nutrientDefinition = nutrientDefinitionRepository.findByNutrNo(nutrNo);
+            if (!nutrientDefinition.isPresent()) {
+                logger.error(String.format("Nutrient definition with nutrNo (%d) does not exist", nutrNo));
+            } else {
+                nutrientDefExist = true;
+            }
+            if (foodDesExist && nutrientDefExist) {
+                foodDescription.get().getNutDataList().add(nutrientData);
+                foodDescriptionRepository.save(foodDescription.get());
+                nutrientData.setFoodDescription(foodDescription.get());
+
+                nutrientDefinition.get().getNutDataList().add(nutrientData);
+                nutrientDefinitionRepository.save(nutrientDefinition.get());
+                nutrientData.setNutrientDefinition(nutrientDefinition.get());
+
+                nutrientDataRepository.save(nutrientData);
+            }
         }
+        logger.info("Completed parsing Nutrient Data");
     }
 
-    private List<FoodDescription> parseFoodDescription(String filePath) {
+    private List<FoodDescription> parseFoodDescription(final String filePath) {
         List<FoodDescription> list = new LinkedList<>();
-        String line = "";
+        String line;
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             while ((line = br.readLine()) != null) {
@@ -68,9 +97,9 @@ public class LoadingInitialData implements CommandLineRunner {
         return list;
     }
 
-    private List<NutrientData> parseNutrientData(String filePath) throws FoodDescriptionNotFoundException {
+    private List<NutrientData> parseNutrientData(final String filePath) {
         List<NutrientData> list = new LinkedList<>();
-        String line = "";
+        String line;
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             while ((line = br.readLine()) != null) {
