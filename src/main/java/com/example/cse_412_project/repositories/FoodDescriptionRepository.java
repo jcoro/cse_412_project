@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface FoodDescriptionRepository extends CrudRepository<FoodDescription, String> {
+public interface FoodDescriptionRepository extends CrudRepository<FoodDescription, Integer> {
     Optional<FoodDescription> findByNdbNo(int ndbNo);
 }

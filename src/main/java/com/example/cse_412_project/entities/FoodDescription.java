@@ -23,7 +23,8 @@ public class FoodDescription {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodDescription", cascade = CascadeType.DETACH)
     private List<NutData> nutDataList;
 
-    // todo: Missing Weight
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodDescription", cascade = CascadeType.DETACH)
+    private List<Weight> weights;
 
     // todo: Missing fdGroup
 
@@ -68,4 +69,8 @@ public class FoodDescription {
     public void setNutDataList(List<NutData> nutDataList) {
         this.nutDataList = nutDataList;
     }
+
+    public List<Weight> getWeights() { return weights; }
+
+    public void setWeights(List<Weight> weights) { this.weights = weights; }
 }
