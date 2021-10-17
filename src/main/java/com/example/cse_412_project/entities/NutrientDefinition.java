@@ -13,7 +13,27 @@ public class NutrientDefinition {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "nutrientDefinition", cascade = CascadeType.DETACH)
     private List<NutrientData> nutDataList;
 
-    // todo: Completed the rest of the columns
+    @Column(name = "NutrDesc")
+    private String nutrDesc;
+
+    @Column(name = "Units")
+    private String unit;
+
+    public String getNutrDesc() {
+        return nutrDesc;
+    }
+
+    public void setNutrDesc(String nutrDesc) {
+        this.nutrDesc = nutrDesc;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
     public int getNutrNo() {
         return nutrNo;

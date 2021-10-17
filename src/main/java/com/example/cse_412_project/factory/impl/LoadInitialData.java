@@ -22,7 +22,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 
 @Component
-public class LoadingInitialData implements CommandLineRunner {
+public class LoadInitialData implements CommandLineRunner {
     @Autowired
     private FoodDescriptionRepository foodDescriptionRepository;
 
@@ -32,7 +32,7 @@ public class LoadingInitialData implements CommandLineRunner {
     @Autowired
     private NutrientDataRepository nutrientDataRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(LoadingInitialData.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoadInitialData.class);
 
     @Override
     public void run(String...args) throws Exception {
@@ -44,6 +44,15 @@ public class LoadingInitialData implements CommandLineRunner {
             }
         });
         logger.info("Completed parsing Food Description");
+
+        List<NutrientDefinition> nutrientDefinitions = parseNutrientDefinition("Place holder for now");
+        nutrientDefinitions.forEach(nutrDef -> {
+            Optional<NutrientDefinition> nutrientDefinition = nutrientDefinitionRepository.findByNutrNo(nutrDef.getNutrNo());
+            if (!nutrientDefinition.isPresent()) {
+                nutrientDefinitionRepository.save(nutrDef);
+            }
+        });
+        logger.info("Completed parsing Nutrient Definition");
 
         List<NutrientData> listOfNutrientData = parseNutrientData("Placeholder for now");
         for (NutrientData nutrientData : listOfNutrientData) {
@@ -111,6 +120,25 @@ public class LoadingInitialData implements CommandLineRunner {
                 ));
                 nutrientData.setNutrVal(Float.parseFloat(Objects.requireNonNull(getActualData(nutDataFields[2]))));
                 list.add(nutrientData);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private List<NutrientDefinition> parseNutrientDefinition(final String filePath) {
+        List<NutrientDefinition> list = new LinkedList<>();
+        String line;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            while ((line = br.readLine()) != null) {
+                String[] nutrDefFields = line.split("\\^");
+                NutrientDefinition nutrientDefinition = new NutrientDefinition();
+                nutrientDefinition.setNutrNo(Integer.parseInt(Objects.requireNonNull(getActualData(nutrDefFields[0]))));
+                nutrientDefinition.setUnit(Objects.requireNonNull(getActualData(nutrDefFields[1])));
+                nutrientDefinition.setNutrDesc(Objects.requireNonNull(getActualData(nutrDefFields[3])));
+                list.add(nutrientDefinition);
             }
         } catch (IOException e) {
             e.printStackTrace();
