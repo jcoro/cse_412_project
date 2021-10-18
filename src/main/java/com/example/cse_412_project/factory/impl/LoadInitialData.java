@@ -1,10 +1,8 @@
 package com.example.cse_412_project.factory.impl;
 
-import com.example.cse_412_project.entities.FoodDescription;
-import com.example.cse_412_project.entities.NutDataKey;
-import com.example.cse_412_project.entities.NutrientData;
-import com.example.cse_412_project.entities.NutrientDefinition;
+import com.example.cse_412_project.entities.*;
 import com.example.cse_412_project.repositories.FoodDescriptionRepository;
+import com.example.cse_412_project.repositories.FoodGroupRepository;
 import com.example.cse_412_project.repositories.NutrientDataRepository;
 import com.example.cse_412_project.repositories.NutrientDefinitionRepository;
 import org.slf4j.LoggerFactory;
@@ -32,14 +30,35 @@ public class LoadInitialData implements CommandLineRunner {
     @Autowired
     private NutrientDataRepository nutrientDataRepository;
 
+    @Autowired
+    private FoodGroupRepository foodGroupRepository;
+
     private static final Logger logger = LoggerFactory.getLogger(LoadInitialData.class);
 
     @Override
     public void run(String...args) throws Exception {
+        List<FoodGroup> foodGroups = parseFoodGroup("Place Holder For Now");
+        foodGroups.forEach(foodGrp -> {
+            Optional<FoodGroup> foodGroup = foodGroupRepository.findByFoodGrpCode(foodGrp.getFoodGrpCode());
+            if (!foodGroup.isPresent()) {
+                foodGroupRepository.save(foodGrp);
+            }
+        });
+        logger.info("Completed parsing Food Group");
+
         List<FoodDescription> foodDescriptions = parseFoodDescription("Place Holder For Now");
         foodDescriptions.forEach(foodDes -> {
-            Optional<FoodDescription> foodDescription = foodDescriptionRepository.findByNdbNo(foodDes.getNdbNo());
-            if (!foodDescription.isPresent()) {
+            Optional<FoodDescription> tempFoodDescription = foodDescriptionRepository.findByNdbNo(foodDes.getNdbNo());
+            if (!tempFoodDescription.isPresent()) {
+                int foodGrpCode = foodDes.getFoodGrpCode();
+                Optional<FoodGroup> tempFoodGroup = foodGroupRepository.findByFoodGrpCode(foodGrpCode);
+                if (!tempFoodGroup.isPresent()) {
+                    logger.error(String.format("Food group with foodGrpCode (%d) does not exist", foodGrpCode));
+                } else {
+                    FoodGroup foodGroup = tempFoodGroup.get();
+                    foodDes.setFoodGroup(foodGroup);
+                    foodGroup.getFoodDescriptionList().add(foodDes);
+                }
                 foodDescriptionRepository.save(foodDes);
             }
         });
@@ -95,7 +114,7 @@ public class LoadInitialData implements CommandLineRunner {
                 String[] foodDesFields = line.split("\\^");
                 FoodDescription foodDescription = new FoodDescription();
                 foodDescription.setNdbNo(Integer.parseInt(Objects.requireNonNull(getActualData(foodDesFields[0]))));
-                foodDescription.setFdGrpCd(Integer.parseInt(Objects.requireNonNull(getActualData(foodDesFields[1]))));
+                foodDescription.setFoodGrpCode(Integer.parseInt(Objects.requireNonNull(getActualData(foodDesFields[1]))));
                 foodDescription.setLongDesc(getActualData(foodDesFields[2]));
                 foodDescription.setShortDesc(getActualData(foodDesFields[3]));
                 list.add(foodDescription);
@@ -139,6 +158,24 @@ public class LoadInitialData implements CommandLineRunner {
                 nutrientDefinition.setUnit(Objects.requireNonNull(getActualData(nutrDefFields[1])));
                 nutrientDefinition.setNutrDesc(Objects.requireNonNull(getActualData(nutrDefFields[3])));
                 list.add(nutrientDefinition);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private List<FoodGroup> parseFoodGroup(final String filePath) {
+        List<FoodGroup> list = new LinkedList<>();
+        String line;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            while ((line = br.readLine()) != null) {
+                String[] foodGroupFields = line.split("\\^");
+                FoodGroup foodGroup = new FoodGroup();
+                foodGroup.setFoodGrpCode(Integer.parseInt(Objects.requireNonNull(getActualData(foodGroupFields[0]))));
+                foodGroup.setFoodGrpDesc(Objects.requireNonNull(getActualData(foodGroupFields[1])));
+                list.add(foodGroup);
             }
         } catch (IOException e) {
             e.printStackTrace();
