@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface NutrientDefinitionRepository extends CrudRepository<NutrientDefinition, String> {
+public interface NutrientDefinitionRepository extends CrudRepository<NutrientDefinition, Integer> {
     Optional<NutrientDefinition> findByNutrNo(int nutrNo);
 }

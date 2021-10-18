@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface NutrientDataRepository extends CrudRepository<NutrientData, String> {
+public interface NutrientDataRepository extends CrudRepository<NutrientData, NutDataKey> {
     Optional<NutrientData> findByNutDataKey(NutDataKey nutDataKey);
 }
