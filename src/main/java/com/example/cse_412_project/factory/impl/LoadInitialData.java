@@ -75,9 +75,9 @@ public class LoadInitialData implements CommandLineRunner {
                 logger.error(String.format("Food description with nbdNo (%d) does not exist", weight.getWeightKey().getNdbNo()));
             } else {
                 FoodDescription foodDescription = tempFoodDescription.get();
+                weight.setFoodDescription(foodDescription);
                 foodDescription.getWeights().add(weight);
                 foodDescriptionRepository.save(foodDescription);
-                weight.setFoodDescription(foodDescription);
                 weightRepository.save(weight);
             }
         }
@@ -111,14 +111,14 @@ public class LoadInitialData implements CommandLineRunner {
             }
             if (foodDesExist && nutrientDefExist) {
                 FoodDescription foodDescription = tempFoodDescription.get();
+                nutrientData.setFoodDescription(foodDescription);
                 foodDescription.getNutDataList().add(nutrientData);
                 foodDescriptionRepository.save(foodDescription);
-                nutrientData.setFoodDescription(foodDescription);
 
                 NutrientDefinition nutrientDefinition = tempNutrientDefinition.get();
+                nutrientData.setNutrientDefinition(nutrientDefinition);
                 nutrientDefinition.getNutDataList().add(nutrientData);
                 nutrientDefinitionRepository.save(nutrientDefinition);
-                nutrientData.setNutrientDefinition(nutrientDefinition);
 
                 nutrientDataRepository.save(nutrientData);
             }
