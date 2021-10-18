@@ -74,27 +74,29 @@ public class LoadInitialData implements CommandLineRunner {
         for (NutrientData nutrientData : listOfNutrientData) {
             boolean foodDesExist = false, nutrientDefExist = false;
             final int ndbNo = nutrientData.getNutDataKey().getNdbNo();
-            Optional<FoodDescription> foodDescription = foodDescriptionRepository.findByNdbNo(ndbNo);
-            if (!foodDescription.isPresent()) {
+            Optional<FoodDescription> tempFoodDescription = foodDescriptionRepository.findByNdbNo(ndbNo);
+            if (!tempFoodDescription.isPresent()) {
                 logger.error(String.format("Food description with nbdNo (%d) does not exist", ndbNo));
             } else {
                 foodDesExist = true;
             }
             final int nutrNo = nutrientData.getNutDataKey().getNutrNo();
-            Optional<NutrientDefinition> nutrientDefinition = nutrientDefinitionRepository.findByNutrNo(nutrNo);
-            if (!nutrientDefinition.isPresent()) {
+            Optional<NutrientDefinition> tempNutrientDefinition = nutrientDefinitionRepository.findByNutrNo(nutrNo);
+            if (!tempNutrientDefinition.isPresent()) {
                 logger.error(String.format("Nutrient definition with nutrNo (%d) does not exist", nutrNo));
             } else {
                 nutrientDefExist = true;
             }
             if (foodDesExist && nutrientDefExist) {
-                foodDescription.get().getNutDataList().add(nutrientData);
-                foodDescriptionRepository.save(foodDescription.get());
-                nutrientData.setFoodDescription(foodDescription.get());
+                FoodDescription foodDescription = tempFoodDescription.get();
+                foodDescription.getNutDataList().add(nutrientData);
+                foodDescriptionRepository.save(foodDescription);
+                nutrientData.setFoodDescription(foodDescription);
 
-                nutrientDefinition.get().getNutDataList().add(nutrientData);
-                nutrientDefinitionRepository.save(nutrientDefinition.get());
-                nutrientData.setNutrientDefinition(nutrientDefinition.get());
+                NutrientDefinition nutrientDefinition = tempNutrientDefinition.get();
+                nutrientDefinition.getNutDataList().add(nutrientData);
+                nutrientDefinitionRepository.save(nutrientDefinition);
+                nutrientData.setNutrientDefinition(nutrientDefinition);
 
                 nutrientDataRepository.save(nutrientData);
             }
