@@ -23,7 +23,8 @@ public class FoodDescription {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodDescription", cascade = CascadeType.DETACH)
     private List<NutrientData> nutDataList;
 
-    // todo: Missing Weight
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodDescription", cascade = CascadeType.DETACH)
+    private List<Weight> weights;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "FdGrp_Cd", referencedColumnName = "FdGrp_Cd")
@@ -70,6 +71,10 @@ public class FoodDescription {
     public void setNutDataList(List<NutrientData> nutDataList) {
         this.nutDataList = nutDataList;
     }
+
+    public List<Weight> getWeights() { return weights; }
+
+    public void setWeights(List<Weight> weights) { this.weights = weights; }
 
     public FoodGroup getFoodGroup() {
         return foodGroup;

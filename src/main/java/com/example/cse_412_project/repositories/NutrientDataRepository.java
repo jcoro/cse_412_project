@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface NutrientDataRepository extends CrudRepository<NutrientData, String> {
+public interface NutrientDataRepository extends CrudRepository<NutrientData, NutDataKey> {
     Optional<NutrientData> findByNutDataKey(NutDataKey nutDataKey);
 }

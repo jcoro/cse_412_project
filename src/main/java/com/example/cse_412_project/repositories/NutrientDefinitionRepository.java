@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface NutrientDefinitionRepository extends CrudRepository<NutrientDefinition, String> {
+public interface NutrientDefinitionRepository extends CrudRepository<NutrientDefinition, Integer> {
     Optional<NutrientDefinition> findByNutrNo(int nutrNo);
 }
