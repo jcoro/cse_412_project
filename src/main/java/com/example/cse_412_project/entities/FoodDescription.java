@@ -12,7 +12,7 @@ public class FoodDescription {
     private int ndbNo;
 
     @Column(name = "FdGrp_Cd")
-    private int fdGrpCd;
+    private int foodGrpCode;
 
     @Column(name = "Long_Desc")
     private String longDesc;
@@ -23,9 +23,12 @@ public class FoodDescription {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodDescription", cascade = CascadeType.DETACH)
     private List<NutrientData> nutDataList;
 
-    // todo: Missing Weight
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodDescription", cascade = CascadeType.DETACH)
+    private List<Weight> weights;
 
-    // todo: Missing fdGroup
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "FdGrp_Cd", referencedColumnName = "FdGrp_Cd")
+    private FoodGroup foodGroup;
 
     // todo: Missing JournalEntry
 
@@ -37,12 +40,12 @@ public class FoodDescription {
         this.ndbNo = NDB_No;
     }
 
-    public int getFdGrpCd() {
-        return fdGrpCd;
+    public int getFoodGrpCode() {
+        return foodGrpCode;
     }
 
-    public void setFdGrpCd(int fdGrpCd) {
-        this.fdGrpCd = fdGrpCd;
+    public void setFoodGrpCode(int fdGrpCd) {
+        this.foodGrpCode = fdGrpCd;
     }
 
     public String getLongDesc() {
@@ -67,5 +70,17 @@ public class FoodDescription {
 
     public void setNutDataList(List<NutrientData> nutDataList) {
         this.nutDataList = nutDataList;
+    }
+
+    public List<Weight> getWeights() { return weights; }
+
+    public void setWeights(List<Weight> weights) { this.weights = weights; }
+
+    public FoodGroup getFoodGroup() {
+        return foodGroup;
+    }
+
+    public void setFoodGroup(FoodGroup foodGroup) {
+        this.foodGroup = foodGroup;
     }
 }
