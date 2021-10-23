@@ -27,7 +27,7 @@ public class FoodDescription {
     private List<Weight> weights;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    @JoinColumn(name = "FdGrp_Cd", referencedColumnName = "FdGrp_Cd")
+    @JoinColumn(name = "FdGrp_Cd", referencedColumnName = "FdGrp_Cd", insertable=false, updatable=false)
     private FoodGroup foodGroup;
 
     // todo: Missing JournalEntry
