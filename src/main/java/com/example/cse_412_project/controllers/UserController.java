@@ -2,14 +2,13 @@ package com.example.cse_412_project.controllers;
 
 import com.example.cse_412_project.entities.impl.AppUser;
 import com.example.cse_412_project.repositories.UserRepository;
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import java.security.Principal;
+import java.util.*;
+
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * UserController.java - DESCRIPTION
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
-
 
     private final UserRepository userRepository;
 

@@ -1,0 +1,4279 @@
+
+<!-- TOP NAV -->
+<!-- PAGE TITLE -->
+<main class="container wrapper">
+  <section>
+    <div id="search-bar">
+      <div class="form-group">
+        <div class="col-md-12">
+          <select class="foodgroups">
+            <option value="" selected>
+              All Food Groups
+            </option>
+            <option value="0100">
+              Dairy and Egg Products
+            </option>
+            <option value="0200">
+              Spices and Herbs
+            </option>
+            <option value="0300">
+              Baby Foods
+            </option>
+            <option value="0400">
+              Fats and Oils
+            </option>
+            <option value="0500">
+              Poultry Products
+            </option>
+            <option value="0600">
+              Soups, Sauces, and Gravies
+            </option>
+            <option value="0700">
+              Sausages and Luncheon Meats
+            </option>
+            <option value="0800">
+              Breakfast Cereals
+            </option>
+            <option value="0900">
+              Fruits and Fruit Juices
+            </option>
+            <option value="1000">
+              Pork Products
+            </option>
+            <option value="1100">
+              Vegetables and Vegetable Products
+            </option>
+            <option value="1200">
+              Nut and Seed Products
+            </option>
+            <option value="1300">
+              Beef Products
+            </option>
+            <option value="1400">
+              Beverages
+            </option>
+            <option value="1500">
+              Finfish and Shellfish Products
+            </option>
+            <option value="1600">
+              Legumes and Legume Products
+            </option>
+            <option value="1700">
+              Lamb, Veal, and Game Products
+            </option>
+            <option value="1800">
+              Baked Products
+            </option>
+            <option value="1900">
+              Sweets
+            </option>
+            <option value="2000">
+              Cereal Grains and Pasta
+            </option>
+            <option value="2100">
+              Fast Foods
+            </option>
+            <option value="2200">
+              Meals, Entrees, and Side Dishes
+            </option>
+            <option value="2300">
+              Snacks
+            </option>
+            <option value="2400">
+              American Indian/Alaska Native Foods
+            </option>
+            <option value="2500">
+              Restaurant Foods
+            </option>
+          </select>
+          <input type="text" class="form-control"
+                 placeholder="Search Foods">
+        </div>
+        <div class="col-md-12">
+          <div style="margin: 10px;">
+            <div id="search-results">
+              <div id="quicktable-container">
+                <table class="prettyTable table table-striped">
+                  <colgroup>
+                    <col style="width:85%">
+                    <col style="width:15%">
+                  </colgroup>
+                  <thead class="header-bar">
+                  <tr>
+                    <th class="header-label">
+                      DESCRIPTION
+                    </th>
+                    <th class="header-label">
+                      SOURCE
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <!-- Repeat Food Query Row -->
+                  <tr>
+                    <td>
+                      <a>
+                      </a>
+                    </td>
+                    <td>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end search-bar-->
+    <div class="row">
+      <div class="journal-box">
+        <div>
+          <div id="datatable" class="main-table">
+            <table id="foodlist" class="data sort2">
+              <thead class="header-bar">
+              <tr>
+                <th colspan="2" class="header-label food">FOOD</th>
+                <th colspan="1" class="header-label quantity">QUANTITY</th>
+                <th colspan="1" class="header-label unit">UNIT</th>
+                <th colspan="1" class="header-label calories">CALORIES</th>
+              </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+    <div class="row">
+      <div class="col-md-12">
+        <!--PROGRESS BARS-->
+        <div class="pbspacer">
+          <div>
+            <div class="countTo">
+              <span class="largelabel">Calories:&nbsp;</span>
+              <strong>0</strong>
+              <span class="targetTotal">of 2000</span>
+            </div>
+          </div>
+          <div>
+            <!--SINGLE PROGRESS BAR-->
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
+                   style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                   aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+        <div class="pbspacer">
+          <div>
+            <div class="countTo">
+              <span class="largelabel">Protein:&nbsp;</span>
+              <strong>0 gm </strong>
+              <span class="targetTotal">of 50 gm</span>
+            </div>
+          </div>
+          <div>
+            <!--SINGLE PROGRESS BAR-->
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
+                   style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                   aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+        <div class="pbspacer">
+          <div>
+            <div class="countTo">
+              <span class="largelabel">Carbohydrates:&nbsp;</span>
+              <strong>0 gm</strong>
+              <span class="targetTotal">of 300 gm</span>
+            </div>
+          </div>
+          <div>
+            <!--SINGLE PROGRESS BAR-->
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
+                   style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                   aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+        <div class="pbspacer">
+          <div>
+            <div class="countTo">
+              <span class="largelabel">Fat:&nbsp;</span>
+              <strong>0 gm</strong>
+              <span class="targetTotal">of 65 gm</span>
+            </div>
+          </div>
+          <div>
+            <!--SINGLE PROGRESS BAR-->
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
+                   style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                   aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+        <div class="pbspacer">
+          <div>
+            <div class="countTo">
+              <span class="largelabel">Fiber&nbsp;</span>
+              <strong>0 gm</strong>
+              <span class="targetTotal">of 75 gm</span>
+            </div>
+          </div>
+          <div>
+            <!--SINGLE PROGRESS BAR-->
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
+                   style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                   aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mealplanspacer"></div>
+      </div>
+      <!--END PROGRESS BARS-->
+    </div>
+    <!-- end row -->
+    <div class="row">
+      <div class="col-md-12">
+        <div id="searchtotalscontainer">
+          <div id="quicksearchtotals" class="col-md-4">
+            <div class="outertable">
+              <table class="facts_label" id="facts_table">
+                <tbody>
+                <tr class="facts_label" id="facts_line_0">
+                  <td>
+                                             <span>
+                                             Nutrition Facts
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td colspan="3">
+                                             <span>
+                                             Serving Size:
+                                             </span>
+                    <span>
+                                             </span>
+                    <span>
+                                             </span>
+                    <span>
+                                             </span>
+                    <span>
+                                             g
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td colspan="3" class="label_divider wide">
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td>
+                                             <span class="nfbold">
+                                             Amount Per Serving
+                                             </span>
+                  </td>
+                  <td colspan="2">
+                                             <span>
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td colspan="3" class="label_divider hairline">
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td>
+                                             <span>
+                                             Calories 0
+                                             </span>
+                  </td>
+                  <td style="text-align: right;" colspan="2">
+                                             <span>
+                                             </span>
+                    <span>
+                                             Calories From Fat 0
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td colspan="3" class="label_divider narrow">
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td>
+                                             <span>
+                                             </span>
+                  </td>
+                  <td colspan="2" style="text-align: right;">
+                                             <span>
+                                             % Daily Value*
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td colspan="3" class="label_divider hairline">
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td>
+                                             <span class="nfbold">
+                                             Total Fat
+                                             </span>
+                  </td>
+                  <td>
+                                             <span>
+                                             </span>
+                    <span>
+                                             0
+                                             </span>
+                    <span>
+                                             g
+                                             </span>
+                  </td>
+                  <td class="label_dv">
+                                             <span>
+                                             0%
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td class="line_above">
+                                             <span class="line_indent">
+                                             Saturated Fat
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                    <span>
+                                             0
+                                             </span>
+                    <span>
+                                             g
+                                             </span>
+                  </td>
+                  <td class="line_above label_dv">
+                                             <span>
+                                             0%
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td class="line_above">
+                                             <span class="line_indent">
+                                             Trans Fat
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                    <span>
+                                             0
+                                             </span>
+                    <span>
+                                             mg
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td class="line_above">
+                                             <span class="nfbold">
+                                             Cholesterol
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                    <span>
+                                             0
+                                             </span>
+                    <span>
+                                             mg
+                                             </span>
+                  </td>
+                  <td class="line_above  label_dv">
+                                             <span>
+                                             0%
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td class="line_above">
+                                             <span class="nfbold">
+                                             Sodium
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                    <span>
+                                             0
+                                             </span>
+                    <span>
+                                             mg
+                                             </span>
+                  </td>
+                  <td class="line_above  label_dv">
+                                             <span>
+                                             0%
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td class="line_above">
+                                             <span class="nfbold">
+                                             Total Carbohydrate
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                    <span>
+                                             0
+                                             </span>
+                    <span>
+                                             g
+                                             </span>
+                  </td>
+                  <td class="line_above label_dv">
+                                             <span>
+                                             0%
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td class="line_above">
+                                             <span class="line_indent">
+                                             Sugars
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                    <span>
+                                             0
+                                             </span>
+                    <span>
+                                             g
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td class="line_above">
+                                             <span class="line_indent">
+                                             Dietary Fiber
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                    <span>
+                                             0
+                                             </span>
+                    <span>
+                                             g
+                                             </span>
+                  </td>
+                  <td class="line_above label_dv">
+                                             <span>
+                                             0%
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td class="line_above">
+                                             <span class="nfbold">
+                                             Protein
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                    <span>
+                                             0
+                                             </span>
+                    <span>
+                                             g
+                                             </span>
+                  </td>
+                  <td class="line_above  label_dv">
+                                             <span>
+                                             0%
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td colspan="3" class="line_above label_divider wide">
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td>
+                                             <span>
+                                             Vitamin A
+                                             </span>
+                  </td>
+                  <td>
+                                             <span>
+                                             </span>
+                  </td>
+                  <td class="label_dv">
+                                             <span>
+                                             0%
+                                             </span>
+                  </td>
+                  <td>
+                                             <span>
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td class="line_above">
+                                             <span>
+                                             Vitamin C
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                  </td>
+                  <td class="line_above  label_dv">
+                                             <span>
+                                             0%
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td class="line_above">
+                                             <span>
+                                             Calcium
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                  </td>
+                  <td class="line_above  label_dv">
+                                             <span>
+                                             0%
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td class="line_above">
+                                             <span>
+                                             Iron
+                                             </span>
+                  </td>
+                  <td class="line_above">
+                                             <span>
+                                             </span>
+                  </td>
+                  <td class="line_above  label_dv">
+                                             <span>
+                                             0%
+                                             </span>
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td colspan="3" class="line_above label_divider hairline">
+                  </td>
+                </tr>
+                <tr class="facts_label">
+                  <td colspan="3">
+                                             <span>
+                                             * Percent Daily Values are based on a 2,000 calorie diet
+                                             </span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="charttotals col-md-4">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+    <div class="row">
+      <div class="col-md-6">
+        <table>
+          <tbody>
+          <tr>
+            <td>
+              <table>
+                <tbody>
+                <tr>
+                  <td class="tableheader">
+                    General
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table class="listing">
+                      <tbody>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Calories
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          kCals
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          Carbon Footprint (CO2 Eq)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          Kg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Weight (In Grams)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">% of Calories From Fat</td>
+                        <td class="col2 ng-binding"></td>
+                        <td class="col3">%</td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">% of Calories From Carbohydrate</td>
+                        <td class="col2 ng-binding"></td>
+                        <td class="col3">%</td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">% of Calories From Protein</td>
+                        <td class="col2 ng-binding"></td>
+                        <td class="col3">%</td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Water
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          Alcohol
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Caffeine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <table>
+                <tbody>
+                <tr>
+                  <td class="tableheader">
+                    Carbohydrates
+                    <button (click)="toggleSugars()" class="nutrtoggle">
+                      {{toggleSugarButtonName}}
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table class="listing">
+                      <tbody>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Carbohydrates
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Fiber
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Starch
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Sugars
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showSugars">
+                        <td class="col1 tabbed2">
+                          Sucrose
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showSugars">
+                        <td class="col1 tabbed2">
+                          Glucose
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showSugars">
+                        <td class="col1 tabbed2">
+                          Fructose
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showSugars">
+                        <td class="col1 tabbed2">
+                          Lactose
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showSugars">
+                        <td class="col1 tabbed2">
+                          Maltose
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showSugars">
+                        <td class="col1 tabbed2">
+                          Galactose
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <table>
+                <tbody>
+                <tr>
+                  <td class="tableheader">
+                    Fats
+                    <button (click)="toggleFat()" class="nutrtoggle">
+                      {{toggleFatButtonName}}
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table class="listing">
+                      <tbody>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Fat
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Monounsaturated
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          14:1n5 Myristoleic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          15:1 Pentadecenoic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          16:1 (undiff.) Palmitoleic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          16:1 cis Palmitoleic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          17:1 Heptadecenoic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:1 (undiff.) Oleic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:1 cis Oleic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          20:1 Gadoleic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          22:1 (undiff.) Erucic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          22:1 cis Erucic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          24:1 Nervonic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Polyunsaturated
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          20:3 Undifferentiated
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          20:4 Undifferentiated
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Omega-6
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:2 (undiff.) Linoleic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:2 n-6 c,c Linoleic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:2 i
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:2 not further defined
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:3 n-6 c,c,c gamma-Linolenic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:3 i
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          20:2 n-6 c,c Eicosadienoic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          20:3 n-6
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Omega-3
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:3 (undiff.) Linolenic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:3 n-3 c,c,c alpha-Linolenic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:4 Parinaric Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          20:3 n-3
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          20:5 n-3 (EPA)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          22:6 n-3 (DHA)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          22:5 n-3 (DPA)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Saturated Fat
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          4:0 Butyric Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          6:0 Caproic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          8:0 Caprylic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          10:0 Capric Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          12:0 Lauric Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          14:0 Myristic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          16:0 Palmitic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:0 Stearic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          20:0 Arachidic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Total Trans Fat
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          16:1 trans Palmitoleic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:1 trans Oleic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:1 11t trans Vaccenic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:2 trans,trans
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:2 CLAs
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          18:2 trans not further defined
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showFat">
+                        <td class="col1 tabbed2">
+                          22:1 trans Erucic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Cholesterol
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <table>
+                <tbody>
+                <tr>
+                  <td class="tableheader">
+                    Protein
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table class="listing">
+                      <tbody>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Protein
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Alanine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Arginine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Aspartic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Cystine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Glutamic Acid
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Glycine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Histidine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Hydroxyproline
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Isoleucine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Leucine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Lysine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Methionine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Phenylalanine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Proline
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Serine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Threonine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Tryptophan
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1 tabbed">
+                          Tyrosine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1 tabbed">
+                          Valine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          gm
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <table>
+          <tbody>
+          <tr>
+            <td>
+              <table>
+                <tbody>
+                <tr>
+                  <td class="tableheader">
+                    Vitamins
+                    <button (click)="toggleVits()" class="nutrtoggle">
+                      {{toggleVitsButtonName}}
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table class="listing">
+                      <tbody>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          B1 (Thiamine)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          B2 (Riboflavin)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          B3 (Niacin)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          B5 (Pantothenic Acid)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          B6 (Pyridoxine)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          Choline
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Betaine
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          B12 (Cobalamin)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Folate
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          Vitamin A
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          IU
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1  tabbed">
+                          Retinol
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1  tabbed">
+                          Retinol Activity Equivalent
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1  tabbed">
+                          Alpha Carotene
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1  tabbed">
+                          Beta Carotene
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1  tabbed">
+                          Beta Cryptoxanthin
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1  tabbed">
+                          Lycopene
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1 tabbed">
+                          Lutein &amp; Zeaxanthin
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Vitamin C
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          Vitamin D
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          IU
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1">
+                          Vitamin D
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1 tabbed">
+                          Vitamin D2 (ergocalciferol)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1 tabbed">
+                          Vitamin D3 (cholecalciferol)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Vitamin E
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1 tabbed">
+                          Beta Tocopherol
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1 tabbed">
+                          Gamma Tocopherol
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1 tabbed">
+                          Delta Tocopherol
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1 tabbed">
+                          Alpha Tocotrienol
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1 tabbed">
+                          Beta Tocotrienol
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1">
+                          Delta Tocotrienol
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1">
+                          Gamma Tocotrienol
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          Vitamin K (phylloquinone)
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1  tabbed">
+                          Dihydrophylloquinone
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven" *ngIf="showVits">
+                        <td class="col1  tabbed">
+                          Menaquinone-4
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <table>
+                <tbody>
+                <tr>
+                  <td class="tableheader">
+                    Minerals
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <table class="listing">
+                      <tbody>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Calcium
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          Copper
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Flouride
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          Iron
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Magnesium
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          Mangenese
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Phosphorous
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          Potassium
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Selenium
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mcg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microseven">
+                        <td class="col1">
+                          Sodium
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr class="microsodd">
+                        <td class="col1">
+                          Zinc
+                        </td>
+                        <td class="col2 ng-binding">
+                          0
+                        </td>
+                        <td class="col3">
+                          mg
+                        </td>
+                        <td class="col4">
+                          <div class="progress">
+                            <div class="progress-bar progress-bar-yellow"
+                                 aria-valuenow="50"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100"
+                                 aria-valuetext="0%"
+                                 aria-labelledby="progressbar"
+                                 style="width: 50%;">
+                              <span class="ng-binding ng-scope">
+                                0%&nbsp;DV
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- end row -->
+  </section>
+</main>
+<!-- FOOTER -->
+<footer>
+  <!-- copyright , scrollTo Top -->
+  <div class="footer-bar">
+    <div class="container">
+      <span class="copyright">Copyright &copy; 2021</span>
+    </div>
+  </div>
+  <!-- copyright , scrollTo Top -->
+  <!-- footer content -->
+  <div class="footer-content">
+    <div class="container">
+      <div class="row">
+        <!-- FOOTER CONTACT INFO -->
+        <div class="column col-md-4">
+          <div class="font-opensans">
+          </div>
+          <p class="contact-desc">
+          </p>
+        </div>
+        <!-- /FOOTER CONTACT INFO -->
+        <!-- FOOTER LOGO -->
+        <div class="column logo col-md-4 text-center">
+
+        </div>
+        <!-- /FOOTER LOGO -->
+        <!-- FOOTER LATEST POSTS -->
+        <div class="column col-md-4 text-right">
+        </div>
+        <!-- /FOOTER LATEST POSTS -->
+      </div>
+    </div>
+  </div>
+  <!-- footer content -->
+</footer>
+<!-- /FOOTER -->
+
