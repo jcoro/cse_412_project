@@ -1,0 +1,17 @@
+~0100~^~Dairy and Egg Products~
+~0500~^~Poultry Products~
+~0700~^~Sausages and Luncheon Meats~
+~0900~^~Fruits and Fruit Juices~
+~1000~^~Pork Products~
+~1100~^~Vegetables and Vegetable Products~
+~1200~^~Nut and Seed Products~
+~1300~^~Beef Products~
+~1400~^~Beverages~
+~1500~^~Finfish and Shellfish Products~
+~1700~^~Lamb, Veal, and Game Products~
+~1800~^~Baked Products~
+~1900~^~Sweets~
+~2000~^~Cereal Grains and Pasta~
+~2100~^~Fast Foods~
+~2200~^~Meals, Entrees, and Side Dishes~
+~2500~^~Snacks~

@@ -12,7 +12,7 @@ public class Weight {
     private float gramWeight;
 
     @Column(name = "Amount")
-    private int amount;
+    private float amount;
 
     @Column(name = "Msre_Desc")
     private String description;
@@ -38,11 +38,11 @@ public class Weight {
         this.gramWeight = gramWeight;
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 

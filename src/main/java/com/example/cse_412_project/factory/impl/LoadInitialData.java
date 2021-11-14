@@ -14,13 +14,13 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+
 import org.slf4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class LoadInitialData implements CommandLineRunner {
     @Autowired
     private FoodDescriptionRepository foodDescriptionRepository;
@@ -38,10 +38,18 @@ public class LoadInitialData implements CommandLineRunner {
     private WeightRepository weightRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(LoadInitialData.class);
+    private static final Set<Integer> foodGrpCodeSet = new HashSet<>();
+    private static final Set<Integer> ndbNoSet = new HashSet<>();
+    private static final Set<Integer> nutrNoSet = new HashSet<>();
 
     @Override
+    @Transactional
     public void run(String...args) throws Exception {
-        List<FoodGroup> foodGroups = parseFoodGroup("Place Holder For Now");
+        if (foodGroupRepository.count() > 0) {
+            logger.info(String.format("FoodGroup Count: (%d) -- Database is already populated", foodGroupRepository.count()));
+            return;
+        }
+        List<FoodGroup> foodGroups = parseFoodGroup("src/main/resources/data/FD_GROUP.txt");
         foodGroups.forEach(foodGrp -> {
             Optional<FoodGroup> foodGroup = foodGroupRepository.findByFoodGrpCode(foodGrp.getFoodGrpCode());
             if (!foodGroup.isPresent()) {
@@ -50,7 +58,7 @@ public class LoadInitialData implements CommandLineRunner {
         });
         logger.info("Completed parsing Food Group");
 
-        List<FoodDescription> foodDescriptions = parseFoodDescription("Place Holder For Now");
+        List<FoodDescription> foodDescriptions = parseFoodDescription("src/main/resources/data/FOOD_DES.txt");
         foodDescriptions.forEach(foodDes -> {
             Optional<FoodDescription> tempFoodDescription = foodDescriptionRepository.findByNdbNo(foodDes.getNdbNo());
             if (!tempFoodDescription.isPresent()) {
@@ -61,14 +69,19 @@ public class LoadInitialData implements CommandLineRunner {
                 } else {
                     FoodGroup foodGroup = tempFoodGroup.get();
                     foodDes.setFoodGroup(foodGroup);
+                    if (foodGroup.getFoodDescriptionList() == null) {
+                        foodGroup.setFoodDescriptionList(new LinkedList<>());
+                    }
                     foodGroup.getFoodDescriptionList().add(foodDes);
+                    foodDescriptionRepository.save(foodDes);
+//                    foodGroupRepository.save(foodGroup);
                 }
-                foodDescriptionRepository.save(foodDes);
             }
         });
+
         logger.info("Completed parsing Food Description");
 
-        List<Weight> weights = parseWeight("Place Holder For Now");
+        List<Weight> weights = parseWeight("src/main/resources/data/WEIGHT.txt");
         for (Weight weight : weights) {
             Optional<FoodDescription> tempFoodDescription = foodDescriptionRepository.findByNdbNo(weight.getWeightKey().getNdbNo());
             if (!tempFoodDescription.isPresent()) {
@@ -76,14 +89,17 @@ public class LoadInitialData implements CommandLineRunner {
             } else {
                 FoodDescription foodDescription = tempFoodDescription.get();
                 weight.setFoodDescription(foodDescription);
+                if (foodDescription.getWeights() == null) {
+                    foodDescription.setWeights(new LinkedList<>());
+                }
                 foodDescription.getWeights().add(weight);
-                foodDescriptionRepository.save(foodDescription);
                 weightRepository.save(weight);
+//                foodDescriptionRepository.save(foodDescription);
             }
         }
         logger.info("Completed parsing Weight");
 
-        List<NutrientDefinition> nutrientDefinitions = parseNutrientDefinition("Place holder for now");
+        List<NutrientDefinition> nutrientDefinitions = parseNutrientDefinition("src/main/resources/data/NUTR_DEF.txt");
         nutrientDefinitions.forEach(nutrDef -> {
             Optional<NutrientDefinition> nutrientDefinition = nutrientDefinitionRepository.findByNutrNo(nutrDef.getNutrNo());
             if (!nutrientDefinition.isPresent()) {
@@ -92,7 +108,7 @@ public class LoadInitialData implements CommandLineRunner {
         });
         logger.info("Completed parsing Nutrient Definition");
 
-        List<NutrientData> listOfNutrientData = parseNutrientData("Placeholder for now");
+        List<NutrientData> listOfNutrientData = parseNutrientData("src/main/resources/data/NUT_DATA.txt");
         for (NutrientData nutrientData : listOfNutrientData) {
             boolean foodDesExist = false, nutrientDefExist = false;
             final int ndbNo = nutrientData.getNutDataKey().getNdbNo();
@@ -112,21 +128,53 @@ public class LoadInitialData implements CommandLineRunner {
             if (foodDesExist && nutrientDefExist) {
                 FoodDescription foodDescription = tempFoodDescription.get();
                 nutrientData.setFoodDescription(foodDescription);
+                if (foodDescription.getNutDataList() == null) {
+                    foodDescription.setNutDataList(new LinkedList<>());
+                }
+
                 foodDescription.getNutDataList().add(nutrientData);
-                foodDescriptionRepository.save(foodDescription);
 
                 NutrientDefinition nutrientDefinition = tempNutrientDefinition.get();
                 nutrientData.setNutrientDefinition(nutrientDefinition);
+
+                if (nutrientDefinition.getNutDataList() == null) {
+                    nutrientDefinition.setNutDataList(new LinkedList<>());
+                }
                 nutrientDefinition.getNutDataList().add(nutrientData);
-                nutrientDefinitionRepository.save(nutrientDefinition);
 
                 nutrientDataRepository.save(nutrientData);
+//                foodDescriptionRepository.save(foodDescription);
+//                nutrientDefinitionRepository.save(nutrientDefinition);
             }
         }
         logger.info("Completed parsing Nutrient Data");
     }
 
+    private List<FoodGroup> parseFoodGroup(final String filePath) {
+        logger.info("Start - Parsing foodgroup");
+        List<FoodGroup> list = new LinkedList<>();
+        String line;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            while ((line = br.readLine()) != null) {
+                String[] foodGroupFields = line.split("\\^");
+                FoodGroup foodGroup = new FoodGroup();
+                foodGroup.setFoodGrpCode(Integer.parseInt(Objects.requireNonNull(getActualData(foodGroupFields[0]))));
+                foodGroup.setFoodGrpDesc(Objects.requireNonNull(getActualData(foodGroupFields[1])));
+                list.add(foodGroup);
+
+                foodGrpCodeSet.add(foodGroup.getFoodGrpCode());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        logger.info("Done - Parsing foodgroup");
+        return list;
+    }
+
     private List<FoodDescription> parseFoodDescription(final String filePath) {
+        logger.info("Start - Parsing food description");
+
         List<FoodDescription> list = new LinkedList<>();
         String line;
         try {
@@ -138,73 +186,23 @@ public class LoadInitialData implements CommandLineRunner {
                 foodDescription.setFoodGrpCode(Integer.parseInt(Objects.requireNonNull(getActualData(foodDesFields[1]))));
                 foodDescription.setLongDesc(getActualData(foodDesFields[2]));
                 foodDescription.setShortDesc(getActualData(foodDesFields[3]));
-                list.add(foodDescription);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
 
-    private List<NutrientData> parseNutrientData(final String filePath) {
-        List<NutrientData> list = new LinkedList<>();
-        String line;
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
-            while ((line = br.readLine()) != null) {
-                String[] nutDataFields = line.split("\\^");
-                NutrientData nutrientData = new NutrientData();
-                nutrientData.setNutDataKey(new NutDataKey(
-                    Integer.parseInt(Objects.requireNonNull(getActualData(nutDataFields[0]))),
-                    Integer.parseInt(Objects.requireNonNull(getActualData(nutDataFields[1])))
-                ));
-                nutrientData.setNutrVal(Float.parseFloat(Objects.requireNonNull(getActualData(nutDataFields[2]))));
-                list.add(nutrientData);
+                if (foodGrpCodeSet.contains(foodDescription.getFoodGrpCode())) {
+                    list.add(foodDescription);
+                    ndbNoSet.add(foodDescription.getNdbNo());
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return list;
-    }
 
-    private List<NutrientDefinition> parseNutrientDefinition(final String filePath) {
-        List<NutrientDefinition> list = new LinkedList<>();
-        String line;
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
-            while ((line = br.readLine()) != null) {
-                String[] nutrDefFields = line.split("\\^");
-                NutrientDefinition nutrientDefinition = new NutrientDefinition();
-                nutrientDefinition.setNutrNo(Integer.parseInt(Objects.requireNonNull(getActualData(nutrDefFields[0]))));
-                nutrientDefinition.setUnit(Objects.requireNonNull(getActualData(nutrDefFields[1])));
-                nutrientDefinition.setNutrDesc(Objects.requireNonNull(getActualData(nutrDefFields[3])));
-                list.add(nutrientDefinition);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
+        logger.info("Done - Parsing food description");
 
-    private List<FoodGroup> parseFoodGroup(final String filePath) {
-        List<FoodGroup> list = new LinkedList<>();
-        String line;
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
-            while ((line = br.readLine()) != null) {
-                String[] foodGroupFields = line.split("\\^");
-                FoodGroup foodGroup = new FoodGroup();
-                foodGroup.setFoodGrpCode(Integer.parseInt(Objects.requireNonNull(getActualData(foodGroupFields[0]))));
-                foodGroup.setFoodGrpDesc(Objects.requireNonNull(getActualData(foodGroupFields[1])));
-                list.add(foodGroup);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return list;
     }
 
     private List<Weight> parseWeight(final String filePath) {
+        logger.info("Start - Parsing weight");
         List<Weight> weights = new LinkedList<>();
         String line = "";
         try {
@@ -216,15 +214,75 @@ public class LoadInitialData implements CommandLineRunner {
                         Integer.parseInt(Objects.requireNonNull(getActualData(weightFields[0]))),
                         Integer.parseInt(Objects.requireNonNull(getActualData(weightFields[1])))
                 ));
-                weight.setAmount(Integer.parseInt(Objects.requireNonNull(getActualData(weightFields[2]))));
+                weight.setAmount(Float.parseFloat(Objects.requireNonNull(getActualData(weightFields[2]))));
                 weight.setDescription(Objects.requireNonNull(getActualData(weightFields[3])));
                 weight.setGramWeight(Float.parseFloat(Objects.requireNonNull(getActualData(weightFields[4]))));
-                weights.add(weight);
+
+                if (ndbNoSet.contains(weight.getWeightKey().getNdbNo())) {
+                    weights.add(weight);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        logger.info("Done - Parsing weight");
         return weights;
+    }
+
+    private List<NutrientDefinition> parseNutrientDefinition(final String filePath) {
+        logger.info("Start - Parsing nutrient definition");
+
+        List<NutrientDefinition> list = new LinkedList<>();
+        String line;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            while ((line = br.readLine()) != null) {
+                String[] nutrDefFields = line.split("\\^");
+                NutrientDefinition nutrientDefinition = new NutrientDefinition();
+                nutrientDefinition.setNutrNo(Integer.parseInt(Objects.requireNonNull(getActualData(nutrDefFields[0]))));
+                nutrientDefinition.setUnit(Objects.requireNonNull(getActualData(nutrDefFields[1])));
+                nutrientDefinition.setNutrDesc(Objects.requireNonNull(getActualData(nutrDefFields[3])));
+                list.add(nutrientDefinition);
+
+                nutrNoSet.add(nutrientDefinition.getNutrNo());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        logger.info("Done - Parsing nutrient definition");
+
+        return list;
+    }
+
+    private List<NutrientData> parseNutrientData(final String filePath) {
+        logger.info("Start - Parsing nutrient data");
+
+        List<NutrientData> list = new LinkedList<>();
+        String line;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            while ((line = br.readLine()) != null) {
+                String[] nutDataFields = line.split("\\^");
+                NutrientData nutrientData = new NutrientData();
+                nutrientData.setNutDataKey(new NutDataKey(
+                        Integer.parseInt(Objects.requireNonNull(getActualData(nutDataFields[0]))),
+                        Integer.parseInt(Objects.requireNonNull(getActualData(nutDataFields[1])))
+                ));
+                nutrientData.setNutrVal(Float.parseFloat(Objects.requireNonNull(getActualData(nutDataFields[2]))));
+
+                if (ndbNoSet.contains(nutrientData.getNutDataKey().getNdbNo())
+                        && nutrNoSet.contains(nutrientData.getNutDataKey().getNutrNo())) {
+                    list.add(nutrientData);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        logger.info("Done - Parsing nutrient data");
+
+        return list;
     }
 
     private String getActualData(String foodDesField) {
@@ -232,8 +290,8 @@ public class LoadInitialData implements CommandLineRunner {
             return null;
         }
         if (foodDesField.charAt(0) == '~') {
-            return foodDesField.substring(1, foodDesField.length() - 1);
+            return foodDesField.substring(1, foodDesField.length() - 1).trim();
         }
-        return foodDesField;
+        return foodDesField.trim();
     }
 }
