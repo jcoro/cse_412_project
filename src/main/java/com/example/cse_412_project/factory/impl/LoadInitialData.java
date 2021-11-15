@@ -1,11 +1,7 @@
 package com.example.cse_412_project.factory.impl;
 
 import com.example.cse_412_project.entities.*;
-import com.example.cse_412_project.repositories.FoodDescriptionRepository;
-import com.example.cse_412_project.repositories.FoodGroupRepository;
-import com.example.cse_412_project.repositories.NutrientDataRepository;
-import com.example.cse_412_project.repositories.NutrientDefinitionRepository;
-import com.example.cse_412_project.repositories.WeightRepository;
+import com.example.cse_412_project.service.impl.*;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,22 +16,26 @@ import org.slf4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-@Transactional
 public class LoadInitialData implements CommandLineRunner {
-    @Autowired
-    private FoodDescriptionRepository foodDescriptionRepository;
+
+    private FoodDescriptionService foodDescriptionService;
+    private NutrientDefinitionService nutrientDefinitionService;
+    private NutrientDataService nutrientDataService;
+    private FoodGroupService foodGroupService;
+    private WeightService weightService;
 
     @Autowired
-    private NutrientDefinitionRepository nutrientDefinitionRepository;
-
-    @Autowired
-    private NutrientDataRepository nutrientDataRepository;
-
-    @Autowired
-    private FoodGroupRepository foodGroupRepository;
-
-    @Autowired
-    private WeightRepository weightRepository;
+    public LoadInitialData(final FoodDescriptionService foodDescriptionService,
+                           final NutrientDefinitionService nutrientDefinitionService,
+                           final NutrientDataService nutrientDataService,
+                           final FoodGroupService foodGroupService,
+                           final WeightService weightService) {
+        this.foodDescriptionService = foodDescriptionService;
+        this.nutrientDefinitionService = nutrientDefinitionService;
+        this.nutrientDataService = nutrientDataService;
+        this.foodGroupService = foodGroupService;
+        this.weightService = weightService;
+    }
 
     private static final Logger logger = LoggerFactory.getLogger(LoadInitialData.class);
     private static final Set<Integer> foodGrpCodeSet = new HashSet<>();
@@ -43,111 +43,67 @@ public class LoadInitialData implements CommandLineRunner {
     private static final Set<Integer> nutrNoSet = new HashSet<>();
 
     @Override
-    @Transactional
     public void run(String...args) throws Exception {
-        if (foodGroupRepository.count() > 0) {
-            logger.info(String.format("FoodGroup Count: (%d) -- Database is already populated", foodGroupRepository.count()));
+        if (foodGroupService.count() > 0) {
+            logger.info(String.format("FoodGroup Count: (%d) -- Database is already populated", foodGroupService.count()));
             return;
         }
+
+        populateFoodGroup();
+        populateFoodDescription();
+        populateWeight();
+        populateNutrientDefinitions();
+        populateNutrientData();
+    }
+
+    private void populateFoodGroup() {
         List<FoodGroup> foodGroups = parseFoodGroup("src/main/resources/data/FD_GROUP.txt");
         foodGroups.forEach(foodGrp -> {
-            Optional<FoodGroup> foodGroup = foodGroupRepository.findByFoodGrpCode(foodGrp.getFoodGrpCode());
+            Optional<FoodGroup> foodGroup = foodGroupService.findByFoodGrpCode(foodGrp.getFoodGrpCode());
             if (!foodGroup.isPresent()) {
-                foodGroupRepository.save(foodGrp);
+                foodGroupService.save(foodGrp);
             }
         });
-        logger.info("Completed parsing Food Group");
+        logger.info("Completed populating Food Group");
+    }
 
+    private void populateFoodDescription() {
         List<FoodDescription> foodDescriptions = parseFoodDescription("src/main/resources/data/FOOD_DES.txt");
         foodDescriptions.forEach(foodDes -> {
-            Optional<FoodDescription> tempFoodDescription = foodDescriptionRepository.findByNdbNo(foodDes.getNdbNo());
-            if (!tempFoodDescription.isPresent()) {
-                int foodGrpCode = foodDes.getFoodGrpCode();
-                Optional<FoodGroup> tempFoodGroup = foodGroupRepository.findByFoodGrpCode(foodGrpCode);
-                if (!tempFoodGroup.isPresent()) {
-                    logger.error(String.format("Food group with foodGrpCode (%d) does not exist", foodGrpCode));
-                } else {
-                    FoodGroup foodGroup = tempFoodGroup.get();
-                    foodDes.setFoodGroup(foodGroup);
-                    if (foodGroup.getFoodDescriptionList() == null) {
-                        foodGroup.setFoodDescriptionList(new LinkedList<>());
-                    }
-                    foodGroup.getFoodDescriptionList().add(foodDes);
-                    foodDescriptionRepository.save(foodDes);
-//                    foodGroupRepository.save(foodGroup);
-                }
-            }
+            foodGroupService.addFoodDescription(foodDes);
         });
+        logger.info("Completed populating Food Description");
+    }
 
-        logger.info("Completed parsing Food Description");
-
+    private void populateWeight() {
         List<Weight> weights = parseWeight("src/main/resources/data/WEIGHT.txt");
         for (Weight weight : weights) {
-            Optional<FoodDescription> tempFoodDescription = foodDescriptionRepository.findByNdbNo(weight.getWeightKey().getNdbNo());
-            if (!tempFoodDescription.isPresent()) {
-                logger.error(String.format("Food description with nbdNo (%d) does not exist", weight.getWeightKey().getNdbNo()));
-            } else {
-                FoodDescription foodDescription = tempFoodDescription.get();
-                weight.setFoodDescription(foodDescription);
-                if (foodDescription.getWeights() == null) {
-                    foodDescription.setWeights(new LinkedList<>());
-                }
-                foodDescription.getWeights().add(weight);
-                weightRepository.save(weight);
-//                foodDescriptionRepository.save(foodDescription);
-            }
+            foodDescriptionService.addWeight(weight);
         }
-        logger.info("Completed parsing Weight");
+        logger.info("Completed populating Weight");
+    }
 
+    private void populateNutrientDefinitions() {
         List<NutrientDefinition> nutrientDefinitions = parseNutrientDefinition("src/main/resources/data/NUTR_DEF.txt");
         nutrientDefinitions.forEach(nutrDef -> {
-            Optional<NutrientDefinition> nutrientDefinition = nutrientDefinitionRepository.findByNutrNo(nutrDef.getNutrNo());
+            Optional<NutrientDefinition> nutrientDefinition = nutrientDefinitionService.findByNutrNo(nutrDef.getNutrNo());
             if (!nutrientDefinition.isPresent()) {
-                nutrientDefinitionRepository.save(nutrDef);
+                nutrientDefinitionService.save(nutrDef);
             }
         });
-        logger.info("Completed parsing Nutrient Definition");
+        logger.info("Completed populating Nutrient Definition");
+    }
 
+    private void populateNutrientData() {
         List<NutrientData> listOfNutrientData = parseNutrientData("src/main/resources/data/NUT_DATA.txt");
         for (NutrientData nutrientData : listOfNutrientData) {
-            boolean foodDesExist = false, nutrientDefExist = false;
-            final int ndbNo = nutrientData.getNutDataKey().getNdbNo();
-            Optional<FoodDescription> tempFoodDescription = foodDescriptionRepository.findByNdbNo(ndbNo);
-            if (!tempFoodDescription.isPresent()) {
-                logger.error(String.format("Food description with nbdNo (%d) does not exist", ndbNo));
-            } else {
-                foodDesExist = true;
-            }
-            final int nutrNo = nutrientData.getNutDataKey().getNutrNo();
-            Optional<NutrientDefinition> tempNutrientDefinition = nutrientDefinitionRepository.findByNutrNo(nutrNo);
-            if (!tempNutrientDefinition.isPresent()) {
-                logger.error(String.format("Nutrient definition with nutrNo (%d) does not exist", nutrNo));
-            } else {
-                nutrientDefExist = true;
-            }
-            if (foodDesExist && nutrientDefExist) {
-                FoodDescription foodDescription = tempFoodDescription.get();
-                nutrientData.setFoodDescription(foodDescription);
-                if (foodDescription.getNutDataList() == null) {
-                    foodDescription.setNutDataList(new LinkedList<>());
-                }
-
-                foodDescription.getNutDataList().add(nutrientData);
-
-                NutrientDefinition nutrientDefinition = tempNutrientDefinition.get();
-                nutrientData.setNutrientDefinition(nutrientDefinition);
-
-                if (nutrientDefinition.getNutDataList() == null) {
-                    nutrientDefinition.setNutDataList(new LinkedList<>());
-                }
-                nutrientDefinition.getNutDataList().add(nutrientData);
-
-                nutrientDataRepository.save(nutrientData);
+            foodDescriptionService.addNutrientData(nutrientData);
+            nutrientDefinitionService.addNutrientData(nutrientData);
+            nutrientDataService.save(nutrientData);
 //                foodDescriptionRepository.save(foodDescription);
 //                nutrientDefinitionRepository.save(nutrientDefinition);
-            }
         }
-        logger.info("Completed parsing Nutrient Data");
+        logger.info("Completed populating Nutrient Data");
     }
 
     private List<FoodGroup> parseFoodGroup(final String filePath) {
