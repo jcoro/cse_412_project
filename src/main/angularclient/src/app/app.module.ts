@@ -7,6 +7,8 @@ import { routing }        from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { JournalComponent } from "./journal/journal.component";
 import {LoginComponent} from "./login/login.component";
+import {SignupComponent} from "./signup/signup.component";
+import {UserListComponent} from "./user-list/user-list.component";
 
 @NgModule({
   imports: [
@@ -14,13 +16,15 @@ import {LoginComponent} from "./login/login.component";
     FormsModule,
     HttpClientModule,
     routing,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     AppComponent,
     HomeComponent,
     JournalComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent,
+    UserListComponent
   ],
   bootstrap: [AppComponent]
 })

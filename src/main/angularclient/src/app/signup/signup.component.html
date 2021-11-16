@@ -1,0 +1,32 @@
+<h2>Sign Up</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label>Email</label>
+    <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && getForm.email.errors }" />
+    <div *ngIf="submitted && getForm.email.errors" class="invalid-feedback">
+      <div *ngIf="getForm.email.errors.required">Email is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Username</label>
+    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && getForm.username.errors }" />
+    <div *ngIf="submitted && getForm.username.errors" class="invalid-feedback">
+      <div *ngIf="getForm.username.errors.required">Username is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && getForm.password.errors }" />
+    <div *ngIf="submitted && getForm.password.errors" class="invalid-feedback">
+      <div *ngIf="getForm.password.errors.required">Password is required</div>
+      <div *ngIf="getForm.password.errors.minlength">Password must be at least 6 characters</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button [disabled]="loading" class="btn btn-primary">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      Sign Up
+    </button>
+    <a routerLink="/login" class="btn btn-link">Cancel</a>
+  </div>
+</form>

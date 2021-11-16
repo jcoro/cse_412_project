@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginRequest } from './login';
 import { Router, ActivatedRoute } from '@angular/router';
+import {AuthService} from "../service/auth.service";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +14,14 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   loginRequest: LoginRequest;
-  registerSuccessMessage: string;
   isError: boolean;
   loading: boolean;
   submitted: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private authService: AuthService,
+              private router: Router,
+              private snackBar: MatSnackBar) {
     this.loginRequest = {
       username: '',
       password: ''
@@ -30,16 +33,19 @@ export class LoginComponent implements OnInit {
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
-
-    this.activatedRoute.queryParams
-      .subscribe(params => {
-        if (params.registered !== undefined && params.registered === 'true') {
-        }
-      });
   }
 
   login() {
     this.submitted = true;
-  }
+    this.loginRequest.username = this.loginForm.get('username').value;
+    this.loginRequest.password = this.loginForm.get('password').value;
 
+    this.authService.login(this.loginRequest).subscribe(data => {
+      this.isError = false;
+      this.router.navigateByUrl('');
+    }, error => {
+      this.isError = true;
+      this.snackBar.open(error, "Close");
+    });
+  }
 }
