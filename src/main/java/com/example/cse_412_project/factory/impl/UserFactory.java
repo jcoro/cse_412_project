@@ -1,6 +1,5 @@
 package com.example.cse_412_project.factory.impl;
 
-import com.example.cse_412_project.entities.IAppUser;
 import com.example.cse_412_project.entities.impl.AppUser;
 import com.example.cse_412_project.factory.IUserFactory;
 import com.example.web.forms.UserForm;
@@ -19,11 +18,9 @@ import java.util.Set;
 public class UserFactory implements IUserFactory {
 
     @Override
-    public IAppUser createUser(UserForm userForm) {
-        IAppUser user = new AppUser();
+    public AppUser createUser(UserForm userForm) {
+        AppUser user = new AppUser();
         user.setEmail(userForm.getEmail());
-        user.setFirstName(userForm.getFirstName());
-        user.setLastName(userForm.getLastName());
         user.setPassword(userForm.getPassword());
         user.setUsername(userForm.getUsername());
 
@@ -31,18 +28,11 @@ public class UserFactory implements IUserFactory {
     }
 
     @Override
-    public IAppUser createUser(String username, String password, String role, boolean enabled) {
-        IAppUser user = new AppUser();
+    public AppUser createUser(String username, String password, String role, boolean enabled) {
+        AppUser user = new AppUser();
         user.setUsername(username);
         user.setPassword(password);
         user.setEnabled(enabled);
-        user.setAccountNonExpired(true);
-        user.setAccountNonLocked(true);
-        user.setCredentialsNonExpired(true);
-
-        Set<SimpleGrantedAuthority> roles = new HashSet<>();
-        roles.add(new SimpleGrantedAuthority(role));
-        user.setRoles(roles);
         return user;
     }
 }

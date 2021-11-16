@@ -2,7 +2,6 @@ package com.example.cse_412_project.service.impl;
 
 import com.example.cse_412_project.entities.NutrientData;
 import com.example.cse_412_project.entities.NutrientDefinition;
-import com.example.cse_412_project.repositories.NutrientDataRepository;
 import com.example.cse_412_project.repositories.NutrientDefinitionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

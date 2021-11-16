@@ -1,14 +1,14 @@
 package com.example.cse_412_project.repositories;
 
+import com.example.cse_412_project.entities.NutrientDefinition;
 import com.example.cse_412_project.entities.impl.AppUser;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-/**
- * UserRepository.java - DESCRIPTION
- * Author: John Coronite
- * Date: 8/29/21
- **/
+import java.util.Optional;
 
-public interface UserRepository extends PagingAndSortingRepository<AppUser, String> {
-    AppUser findByEmail(String email);
+@Repository
+public interface UserRepository extends JpaRepository<AppUser, String> {
+    Optional<AppUser> findByUsername(String username);
+    Optional<AppUser> findByEmail(String email);
 }

@@ -1,6 +1,7 @@
 package com.example.cse_412_project.factory;
 
 import com.example.cse_412_project.entities.IAppUser;
+import com.example.cse_412_project.entities.impl.AppUser;
 import com.example.web.forms.UserForm;
 
 /**
@@ -10,8 +11,8 @@ import com.example.web.forms.UserForm;
  **/
 public interface IUserFactory {
 
-    IAppUser createUser(UserForm userForm);
+    AppUser createUser(UserForm userForm);
 
-    IAppUser createUser(String username, String password, String role, boolean enabled);
+    AppUser createUser(String username, String password, String role, boolean enabled);
 
 }
