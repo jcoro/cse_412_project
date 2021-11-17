@@ -1,7 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppComponent }  from './app.component';
 import { AppRoutingModule }        from './app.routing';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {TokenInterceptor} from "./token-interceptor";
 
 @NgModule({
   imports: [
@@ -34,7 +35,14 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     JournalComponent,
     LoginComponent,
     SignupComponent,
-    UserListComponent
+    UserListComponent,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })

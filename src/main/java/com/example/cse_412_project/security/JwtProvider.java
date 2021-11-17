@@ -19,10 +19,12 @@ import java.util.stream.Collectors;
 @Service
 public class JwtProvider {
 
+    private static final String SECRETKEY = "mySecretKey";
+
+
     public String generateToken(final Authentication authentication) {
         User principal = (User) authentication.getPrincipal();
 
-        String secretKey = "mySecretKey";
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_USER");
 
@@ -35,10 +37,20 @@ public class JwtProvider {
                                 .map(GrantedAuthority::getAuthority)
                                 .collect(Collectors.toList()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 600000))
+                .setExpiration(new Date(System.currentTimeMillis() + 60000))
                 .signWith(SignatureAlgorithm.HS512,
-                        secretKey.getBytes()).compact();
+                        SECRETKEY.getBytes()).compact();
 
         return "Bearer " + token;
+    }
+
+    public String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(Date.from(Instant.now()))
+                .signWith(SignatureAlgorithm.HS512,
+                        SECRETKEY.getBytes())
+                .setExpiration(new Date(System.currentTimeMillis() + 60000))
+                .compact();
     }
 }

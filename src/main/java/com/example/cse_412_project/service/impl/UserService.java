@@ -10,6 +10,7 @@ import com.example.cse_412_project.factory.IUserFactory;
 import com.example.cse_412_project.factory.impl.LoadInitialData;
 import com.example.cse_412_project.repositories.UserRepository;
 import com.example.cse_412_project.security.JwtProvider;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ import static java.util.Collections.singletonList;
 
 @Transactional
 @Service
+@AllArgsConstructor
 //@PropertySource("classpath:/user.properties")
 public class UserService {
 
@@ -47,26 +49,7 @@ public class UserService {
 
     private final IUserFactory userFactory;
 
-    private final AuthenticationManager authenticationManager;
-
-    private final JwtProvider jwtProvider;
-
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
-
-    @Autowired
-    public UserService(final Environment env,
-                       final UserRepository userRepository,
-                       final BCryptPasswordEncoder bCryptPasswordEncoder,
-                       final IUserFactory userFactory,
-                       final AuthenticationManager authenticationManager,
-                       final JwtProvider jwtProvider){
-        this.environment = env;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.userRepository = userRepository;
-        this.userFactory = userFactory;
-        this.authenticationManager = authenticationManager;
-        this.jwtProvider = jwtProvider;
-    }
 
     public AppUser findUserByUsername(String arg0) throws UsernameNotFoundException {
         Optional<AppUser> foundUser = userRepository.findById(arg0);
@@ -83,34 +66,6 @@ public class UserService {
         throw new UsernameNotFoundException(String.format("No user with username %s found.", arg0));
     }
 
-    public AuthenticationResponse login(LoginRequest loginRequest) {
-        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authenticate);
-        String token = jwtProvider.generateToken(authenticate);
-
-        return AuthenticationResponse.builder().authenticationToken(token)
-                .expiresAt(Instant.now().plusMillis(System.currentTimeMillis() + 600000).toEpochMilli())
-                .username(loginRequest.getUsername())
-                .build();
-    }
-
-    public boolean signup(RegisterRequest registerRequest) {
-        Optional<AppUser> existingUser = userRepository.findById(registerRequest.getUsername());
-        if (existingUser.isPresent()) {
-            return false;
-        }
-        AppUser user = new AppUser();
-        user.setUsername(registerRequest.getUsername());
-        user.setPassword(bCryptPasswordEncoder.encode(registerRequest.getPassword()));
-        user.setEmail(registerRequest.getEmail());
-        user.setCreated(Instant.now());
-
-        // we can set this to false if we use token => after validating token, set it to true
-        user.setEnabled(true);
-        userRepository.save(user);
-        return true;
-    }
-
     public void changePassword(AppUser user, String password) throws UserDoesNotExistException {
         Optional<AppUser> existingUser = userRepository.findById(user.getUsername());
         if (!existingUser.isPresent()) {
@@ -118,7 +73,7 @@ public class UserService {
         }
         user = existingUser.get();
         user.setPassword(bCryptPasswordEncoder.encode(password));
-        userRepository.save((AppUser)user);
+        userRepository.save(user);
     }
 
     public AppUser findByUsername(String username) {

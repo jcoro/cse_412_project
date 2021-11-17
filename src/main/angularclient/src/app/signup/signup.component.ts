@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {AuthService} from "../service/auth.service";
 
 @Component({ templateUrl: 'signup.component.html' })
 export class SignupComponent implements OnInit {
   registerForm: FormGroup;
-  loading = false;
   submitted = false;
+  loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
+    private authService: AuthService,
     private router: Router,
   ) {
-    // redirect to home if already logged in
-    // this.router.navigate(['/']);
+    if (authService.isLoggedIn()) {
+      this.router.navigate(['/home']);
+    }
   }
 
   ngOnInit() {
@@ -28,14 +31,20 @@ export class SignupComponent implements OnInit {
   get getForm() { return this.registerForm.controls; }
 
   onSubmit() {
+    this.loading = true;
     this.submitted = true;
 
     if (this.registerForm.invalid) {
       return;
     }
-
-    this.loading = true;
-
-    // api call to sign up
+    this.authService.signup(this.registerForm.getRawValue())
+      .subscribe(data => {
+        console.log(data);
+        this.router.navigate(['/login'],
+          { queryParams: { registered: 'true' } });
+      }, error => {
+        console.log(error);
+      });
+    this.loading = false;
   }
 }

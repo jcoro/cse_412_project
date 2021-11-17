@@ -4,13 +4,14 @@ import { JournalComponent } from "./journal/journal.component";
 import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
 import {NgModule} from "@angular/core";
+import {AuthGuardService} from "./service/auth.guard.service";
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'signup', component: SignupComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'journal', component: JournalComponent},
-  { path: '**', redirectTo: '' }
+  { path: 'signup', component: SignupComponent},
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuardService] },
+  { path: 'journal', component: JournalComponent, canActivate: [AuthGuardService] },
+  { path: '**', redirectTo: '', canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
