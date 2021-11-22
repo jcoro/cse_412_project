@@ -5,7 +5,7 @@
     <div id="search-bar">
       <div class="form-group">
         <div class="row">
-          <div class="col-md-12">
+          <div style="display: flex; flex-direction: row; gap: 15px; margin-bottom: 10px;">
             <div>
               <input type="date"
                      id="datePicker"
@@ -16,152 +16,81 @@
                      min="2021-1-1" max="2022-11-20">
             </div>
             <div>
-              <select class="foodgroups" (change)="foodGroupUpdated($event)">
-                <option value=0 [selected]="selectedFoodGroup === 0">
-                  All Food Groups
-                </option>
-                <option value="100" [selected]="selectedFoodGroup === 100">
-                  Dairy and Egg Products
-                </option>
-                <option value="200" [selected]="selectedFoodGroup === 200">
-                  Spices and Herbs
-                </option>
-                <option value="300" [selected]="selectedFoodGroup === 300">
-                  Baby Foods
-                </option>
-                <option value="400" [selected]="selectedFoodGroup === 400">
-                  Fats and Oils
-                </option>
-                <option value="500" [selected]="selectedFoodGroup === 500">
-                  Poultry Products
-                </option>
-                <option value="600" [selected]="selectedFoodGroup === 600">
-                  Soups, Sauces, and Gravies
-                </option>
-                <option value="700" [selected]="selectedFoodGroup === 700">
-                  Sausages and Luncheon Meats
-                </option>
-                <option value="800" [selected]="selectedFoodGroup === 800">
-                  Breakfast Cereals
-                </option>
-                <option value="900" [selected]="selectedFoodGroup === 900">
-                  Fruits and Fruit Juices
-                </option>
-                <option value="1000" [selected]="selectedFoodGroup === 1000">
-                  Pork Products
-                </option>
-                <option value="1100" [selected]="selectedFoodGroup === 1100">
-                  Vegetables and Vegetable Products
-                </option>
-                <option value="1200" [selected]="selectedFoodGroup === 1200">
-                  Nut and Seed Products
-                </option>
-                <option value="1300" [selected]="selectedFoodGroup === 1300">
-                  Beef Products
-                </option>
-                <option value="1400" [selected]="selectedFoodGroup === 1400">
-                  Beverages
-                </option>
-                <option value="1500" [selected]="selectedFoodGroup === 1500">
-                  Finfish and Shellfish Products
-                </option>
-                <option value="1600" [selected]="selectedFoodGroup === 1600">
-                  Legumes and Legume Products
-                </option>
-                <option value="1700" [selected]="selectedFoodGroup === 1700">
-                  Lamb, Veal, and Game Products
-                </option>
-                <option value="1800" [selected]="selectedFoodGroup === 1800">
-                  Baked Products
-                </option>
-                <option value="1900" [selected]="selectedFoodGroup === 1900">
-                  Sweets
-                </option>
-                <option value="2000" [selected]="selectedFoodGroup === 2000">
-                  Cereal Grains and Pasta
-                </option>
-                <option value="2100" [selected]="selectedFoodGroup === 2100">
-                  Fast Foods
-                </option>
-                <option value="2200" [selected]="selectedFoodGroup === 2200">
-                  Meals, Entrees, and Side Dishes
-                </option>
-                <option value="2300" [selected]="selectedFoodGroup === 2300">
-                  Snacks
-                </option>
-                <option value="2400" [selected]="selectedFoodGroup === 2400">
-                  American Indian/Alaska Native Foods
-                </option>
-                <option value="2500" [selected]="selectedFoodGroup === 2500">
-                  Restaurant Foods
-                </option>
+              <select class="foodgroups" [formControl]="selectedFoodGroup">
+                <option *ngFor="let foodGroup of foodGroups" [ngValue]="foodGroup.foodGrpCode">{{foodGroup.foodGrpDesc}}</option>
               </select>
             </div>
-            <input type="text" class="form-control"
-                   id="search-text"
-                   aria-describedby="search-text"
-                   [(ngModel)]="searchText"
-                   placeholder="Search Foods">
           </div>
-        </div>
-        <div class="col-md-12">
-          <div style="margin: 10px;">
-            <div id="search-results">
-              <div id="quicktable-container">
-                <table class="prettyTable table table-striped">
-                  <colgroup>
-                    <col style="width:85%">
-                    <col style="width:15%">
-                  </colgroup>
-                  <thead class="header-bar">
-                  <tr>
-                    <th class="header-label">
-                      DESCRIPTION
-                    </th>
-                    <th class="header-label">
-                      SOURCE
-                    </th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <!-- Repeat Food Query Row -->
-                  <ng-container *ngFor="let food of foods | appFilter: searchText:selectedFoodGroup | slice:0:20">
-                    <tr *ngIf="searchText != ''">
-                      <td class="searched-food">
-                        <a appHighlight
-                           [searchedWord]="searchText"
-                           [content]="food.longDesc"
-                           [classToApply]="'font-weight-bold'"
-                           [setTitle]='true'
-                           [href]=""
-                           (click)="selectFood(food)">{{food.longDesc}}</a>
-                      </td>
-                      <td>
-                        USDA
-                      </td>
-                    </tr>
-                  </ng-container>
-
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+          <input class="col-md-12 form-control"
+                 style="margin-right: 10px"
+                 type="text"
+                 id="search-text"
+                 aria-describedby="search-text"
+                 [(ngModel)]="searchText"
+                 placeholder="Search Foods">
         </div>
       </div>
     </div>
     <!-- end search-bar-->
-    <div class="row">
+    <div style="display:flex; flex-direction: row;">
+      <div style="margin: 10px 0 10px 0;">
+        <div id="search-results">
+          <div id="quicktable-container">
+            <table class="prettyTable table table-striped">
+              <colgroup>
+                <col style="width:85%">
+                <col style="width:15%">
+              </colgroup>
+              <thead class="header-bar">
+              <tr>
+                <th class="header-label">
+                  DESCRIPTION
+                </th>
+                <th class="header-label">
+                  SOURCE
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <!-- Repeat Food Query Row -->
+              <ng-container *ngFor="let food of foods | appFilter: searchText:selectedFoodGroup.value | slice:0:20">
+                <tr *ngIf="searchText != ''">
+                  <td class="searched-food">
+                    <a appHighlight
+                       [searchedWord]="searchText"
+                       [content]="food.longDesc"
+                       [classToApply]="'font-weight-bold'"
+                       [setTitle]='true'
+                       [href]=""
+                       (click)="selectFood(food)">{{food.longDesc}}</a>
+                  </td>
+                  <td style="text-align: center">
+                    USDA
+                  </td>
+                </tr>
+              </ng-container>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
       <div class="journal-box">
         <div>
           <div id="datatable" class="main-table">
             <table id="foodlist" class="data sort2">
+              <colgroup>
+                <col style="width:74%">
+                <col style="width:8%">
+                <col style="width:10%">
+                <col style="width:8%">
+              </colgroup>
               <thead class="header-bar">
               <tr>
-                <th colspan="2" class="header-label food">FOOD</th>
-                <th colspan="1" class="header-label amount">AMOUNT</th>
-                <th colspan="1" class="header-label unit">UNIT</th>
-                <th colspan="1" class="header-label calories">CALORIES</th>
+                <th class="header-label food">FOOD</th>
+                <th class="header-label amount">AMOUNT</th>
+                <th class="header-label unit">UNIT</th>
+                <th class="header-label calories">CALORIES</th>
               </tr>
               </thead>
               <tbody>

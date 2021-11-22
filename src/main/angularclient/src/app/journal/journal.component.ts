@@ -6,6 +6,8 @@ import {JournalEntryService} from "../service/journalEntry.service";
 import {Food} from "../model/food";
 import {JournalEntry} from "../model/journal-entry";
 import {AuthService} from "../service/auth.service";
+import {FoodGroupService} from "../service/foodgroup.service";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'journal',
@@ -17,7 +19,7 @@ export class JournalComponent {
   now = new Date();
   selectedDate = this.datePipe.transform(this.now, 'YYYY-MM-dd');
   searchText = '';
-  selectedFoodGroup: number = 0;
+  selectedFoodGroup = new FormControl(0);
   foods: Food[];
   journalEntries: JournalEntry[] = [];
   showSugars: boolean = false;
@@ -26,12 +28,21 @@ export class JournalComponent {
   toggleSugarButtonName: any = 'Show';
   toggleFatButtonName: any = 'Show';
   toggleVitsButtonName: any = 'Show';
+  foodGroups = [];
   constructor(private FoodService: FoodService,
               private JournalEntryService: JournalEntryService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private foodGroupService: FoodGroupService) {
   }
 
   ngOnInit(): void {
+    this.foodGroupService.findAll().subscribe(data => {
+      this.foodGroups.push({foodGrpCode: 0, foodGrpDesc: 'All Food Groups'});
+      this.foodGroups.push(...data);
+    }, error => {
+      console.log("ERROR fetching Foods")
+      console.log(error)
+    })
     this.FoodService.findAll().subscribe(data => {
       this.foods = data;
     }, error => {
@@ -85,10 +96,6 @@ export class JournalComponent {
   //     return Math.round((this.journalEntries[i].amount * gramweight * this.journalEntries[i].nutrient_value.find(nv => nv.nutr_no === 208).nutr_val) / 100);
   //   }
   // }
-
-  foodGroupUpdated(event){
-    this.selectedFoodGroup = +event.target.value;
-  }
 
   toggleSugars() {
     this.showSugars = !this.showSugars;

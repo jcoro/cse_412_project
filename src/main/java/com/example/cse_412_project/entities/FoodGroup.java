@@ -17,6 +17,13 @@ public class FoodGroup {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodGrpCode", cascade = CascadeType.DETACH)
     private List<FoodDescription> foodDescriptionList;
 
+    public FoodGroup() {}
+
+    public FoodGroup(final int foodGrpCode, final String foodGrpDesc) {
+        this.foodGrpCode = foodGrpCode;
+        this.foodGrpDesc = foodGrpDesc;
+    }
+
     public int getFoodGrpCode() {
         return foodGrpCode;
     }

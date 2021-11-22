@@ -19,6 +19,7 @@ import {TokenInterceptor} from "./token-interceptor";
 import {HighlightDirective} from './directives/highlight.directive';
 import {FilterPipe} from "./pipes/filter.pipe";
 import {DateFilterPipe} from "./pipes/dateFilter.pipe";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import {DateFilterPipe} from "./pipes/dateFilter.pipe";
     BrowserAnimationsModule,
     FontAwesomeModule,
     NgbModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CommonModule
   ],
   declarations: [
     AppComponent,
