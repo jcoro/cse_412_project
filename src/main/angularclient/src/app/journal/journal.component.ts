@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
-import {DatePipe} from "@angular/common";
 import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import {FoodService} from "../service/food.service";
 import {JournalEntryService} from "../service/journalEntry.service";
 import {Food} from "../model/food";
-import {JournalEntry} from "../model/journal-entry";
+import {JournalEntry, JournalEntryResponse, JournalEntryUpdate} from "../model/journal-entry";
 import {AuthService} from "../service/auth.service";
 
 @Component({
@@ -13,13 +12,11 @@ import {AuthService} from "../service/auth.service";
 })
 export class JournalComponent {
   faTimes = faTimes;
-  datePipe = new DatePipe('en-US');
-  now = new Date();
-  selectedDate = this.datePipe.transform(this.now, 'YYYY-MM-dd');
+  selectedDate: Date = new Date(Date.now());
   searchText = '';
   selectedFoodGroup: number = 0;
   foods: Food[];
-  journalEntries: JournalEntry[] = [];
+  journalEntries: JournalEntryResponse[] = [];
   showSugars: boolean = false;
   showFat: boolean = false;
   showVits: boolean = false;
@@ -30,6 +27,7 @@ export class JournalComponent {
               private JournalEntryService: JournalEntryService,
               private authService: AuthService) {
   }
+
 
   ngOnInit(): void {
     this.FoodService.findAll().subscribe(data => {
@@ -49,7 +47,26 @@ export class JournalComponent {
   }
 
   changeSelectedDate(value) {
-    this.selectedDate = value;
+    let dateArray = value.split('-')
+    let month = +dateArray[1]
+    if (month === 1){
+      month = 12;
+    } else {
+      month = month - 1
+    }
+    let date = new Date()
+    date.setFullYear(dateArray[0])
+    date.setMonth(month)
+    date.setDate(dateArray[2])
+    this.selectedDate = date;
+  }
+
+  sameDay(d1, d2) {
+    let date1 = new Date(d1);
+    let date2 = new Date(d2);
+    return date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate();
   }
 
   selectFood(food) {
@@ -57,34 +74,86 @@ export class JournalComponent {
     const entry: JournalEntry = {
       username: this.authService.getUserName(),
       amount: 1,
-      journalDate: new Date(this.selectedDate),
-      orderIndex: this.journalEntries.length,
-      ndbNo: food.ndbNo,
-      seq: 0
+      journal_date: this.selectedDate,
+      order_index: this.journalEntries.length,
+      ndb_no: food.ndbNo,
+      seq: 1
     };
+
     this.JournalEntryService.createJournalEntry(entry).subscribe(data => {
-      this.journalEntries.push(data);
+      const journalEntryResponse: JournalEntryResponse = {
+        j_id: data.j_id,
+        username: data.username,
+        journal_date: data.journal_date,
+        order_index: data.order_index,
+        amount: data.amount,
+        seq: data.seq,
+        ndb_no: data.ndb_no,
+        long_desc:data.long_desc,
+        fdgrp_cd: data.fdgrp_cd,
+        measurement: data.measurement,
+        nutrient_value: data.nutrient_value
+      }
+      this.journalEntries.push(journalEntryResponse);
     });
   }
 
   updateEntryAmount(i, event) {
     this.journalEntries[i].amount = +event.target.value;
+    this.editJournalEntry(i);
   }
 
-  updateUnitAmount(i, event) {
+  updateUnitMeasureSequence(i, event) {
     this.journalEntries[i].seq = +event.target.value;
+    this.editJournalEntry(i);
+  }
+
+  editJournalEntry(i){
+    const entry: JournalEntryUpdate = {
+      j_id: this.journalEntries[i].j_id,
+      username: this.journalEntries[i].username,
+      journal_date: this.journalEntries[i].journal_date,
+      order_index: this.journalEntries[i].order_index,
+      amount: this.journalEntries[i].amount,
+      seq: this.journalEntries[i].seq,
+      ndb_no: this.journalEntries[i].ndb_no
+    }
+    this.JournalEntryService.updateJournalEntry(entry).subscribe(data => {
+      this.journalEntries[i] = {
+        j_id: data.j_id,
+        username: data.username,
+        journal_date: data.journal_date,
+        order_index: data.order_index,
+        amount: data.amount,
+        seq: data.seq,
+        ndb_no: data.ndb_no,
+        long_desc: data.long_desc,
+        fdgrp_cd: data.fdgrp_cd,
+        measurement: data.measurement,
+        nutrient_value: data.nutrient_value
+      };
+    });
   }
 
   deleteEntry(i) {
+    let j_id = this.journalEntries[i].j_id
     this.journalEntries = this.journalEntries.filter((e,index) => index !== i);
+    this.JournalEntryService.deleteJournalEntry(j_id).subscribe({
+      next: data => {
+        console.log('Delete successful');
+      },
+      error: error => {
+        console.error('There was an error deleting the entry', error.message);
+      }
+    });
   }
 
-  // getCaloriesForEntry(i) {
-  //   if (this.journalEntries.length > 0) {
-  //     let gramweight = +this.journalEntries[i].measurements.find(m => m.seq === this.journalEntries[i].seq).gramweight;
-  //     return Math.round((this.journalEntries[i].amount * gramweight * this.journalEntries[i].nutrient_value.find(nv => nv.nutr_no === 208).nutr_val) / 100);
-  //   }
-  // }
+  getCaloriesForEntry(i) {
+    if (this.journalEntries.length > 0) {
+      let gramweight = +this.journalEntries[i].measurement.find(m => m.seq === this.journalEntries[i].seq).gramweight;
+      return Math.round((this.journalEntries[i].amount * gramweight * this.journalEntries[i].nutrient_value.find(nv => nv.nutrNo === 208).nutrVal) / 100);
+    }
+  }
 
   foodGroupUpdated(event){
     this.selectedFoodGroup = +event.target.value;

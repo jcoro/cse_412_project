@@ -30,7 +30,8 @@ public class FoodDescription {
     @JoinColumn(name = "FdGrp_Cd", referencedColumnName = "FdGrp_Cd", insertable=false, updatable=false)
     private FoodGroup foodGroup;
 
-    // todo: Missing JournalEntry
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "foodDescription", cascade = CascadeType.DETACH)
+    private List<JournalEntry> journalEntryList;
 
     public int getNdbNo() {
         return ndbNo;

@@ -2,9 +2,17 @@ package com.example.cse_412_project.DTO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 public class JournalEntryDto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @JsonProperty("j_id")
+    private int jId;
 
     @JsonProperty("username")
     private String username;
@@ -12,30 +20,24 @@ public class JournalEntryDto {
     @JsonProperty("amount")
     private float amount;
 
-    @JsonProperty("journalDate")
+    @JsonProperty("journal_date")
     private LocalDateTime journalDate;
 
-    @JsonProperty("orderIndex")
+    @JsonProperty("order_index")
     private int orderIndex;
 
-    @JsonProperty("ndbNo")
+    @JsonProperty("ndb_no")
     private int ndbNo;
 
     @JsonProperty("seq")
     private int seq;
 
-    public JournalEntryDto(String username,
-                           float amount,
-                           LocalDateTime journalDate,
-                           int orderIndex,
-                           int ndbNo,
-                           int seq) {
-        this.username = username;
-        this.amount = amount;
-        this.journalDate = journalDate;
-        this.orderIndex = orderIndex;
-        this.ndbNo = ndbNo;
-        this.seq = seq;
+    public int getjId() {
+        return jId;
+    }
+
+    public void setjId(int jId) {
+        this.jId = jId;
     }
 
     public String getUsername() {

@@ -31,7 +31,6 @@ export class FilterPipe implements PipeTransform {
       return it.longDesc.toLocaleLowerCase().includes(searchText);
     });
 
-
     return returnItems;
   }
 }

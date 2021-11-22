@@ -23,7 +23,7 @@ public class JournalEntryController {
 
     @GetMapping("/journalentries/{username}")
     public List<JournalEntryResponse> getJournalEntries(@PathVariable("username") String username) {
-        return journalEntryService.findAllDtoWithUsername(username);
+        return journalEntryService.getAllByUsername(username);
     }
 
     @GetMapping("/journalentries")
@@ -32,7 +32,19 @@ public class JournalEntryController {
     }
 
     @PostMapping("/journalentries")
-    public JournalEntry saveJournalEntry(@RequestBody JournalEntryDto journalEntryDto) {
+    public JournalEntryResponse saveJournalEntry(@RequestBody JournalEntryDto journalEntryDto) {
         return journalEntryService.save(journalEntryDto);
+    }
+
+    @PostMapping("/journalentries/{id}")
+    public JournalEntryResponse updateJournalEntry(@PathVariable("id") int id,
+                                                   @RequestBody JournalEntryDto journalEntryDto){
+        return journalEntryService.updateJournalEntry(id, journalEntryDto);
+    }
+
+    @PostMapping("/journalentries/{id}/delete")
+    public void deleteJournalEntry(@PathVariable("id") int id,
+                                   @RequestBody JournalEntryDto journalEntryDto){
+        journalEntryService.deleteJournalEntry(id);
     }
 }

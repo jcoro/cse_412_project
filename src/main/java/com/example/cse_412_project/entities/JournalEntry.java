@@ -4,6 +4,7 @@ import com.example.cse_412_project.entities.impl.AppUser;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 
 @Entity
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 public class JournalEntry {
     @Id
     @Column(name = "j_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int jId;
 
     @Column(name="username", nullable = false)
@@ -35,6 +36,10 @@ public class JournalEntry {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "username", referencedColumnName = "username", insertable=false, updatable=false)
     private AppUser user;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "NDB_No", referencedColumnName = "NDB_No", insertable=false, updatable=false)
+    private FoodDescription foodDescription;
 
     public int getjId() {
         return jId;
@@ -98,5 +103,13 @@ public class JournalEntry {
 
     public void setUser(AppUser user) {
         this.user = user;
+    }
+
+    public FoodDescription getFoodDescription() {
+        return foodDescription;
+    }
+
+    public void setFoodDescription(FoodDescription foodDescription) {
+        this.foodDescription = foodDescription;
     }
 }
