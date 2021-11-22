@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoginRequest } from './login';
-import { Router, ActivatedRoute } from '@angular/router';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {LoginRequest} from './login';
+import {Router, ActivatedRoute} from '@angular/router';
 import {AuthService} from "../service/auth.service";
 
 @Component({

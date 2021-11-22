@@ -8,13 +8,20 @@ public class FoodDescriptionDto {
     private int ndbNo;
 
     @JsonProperty("fdGrpCd")
-    private String fdGrpCd;
+    private int fdGrpCd;
 
     @JsonProperty("longDesc")
     private String longDesc;
 
     @JsonProperty("shortDesc")
     private String shortDesc;
+
+    public FoodDescriptionDto(int ndbNo, int fdGrpCd, String longDesc, String shortDesc){
+        this.ndbNo = ndbNo;
+        this.fdGrpCd = fdGrpCd;
+        this.longDesc = longDesc;
+        this.shortDesc = shortDesc;
+    }
 
     // todo: When someone create NutDataDto, uncomment this and its getter and setter.
 //    @JsonProperty("nutDataList")
@@ -28,11 +35,11 @@ public class FoodDescriptionDto {
         this.ndbNo = NDB_No;
     }
 
-    public String getFdGrpCd() {
+    public int getFdGrpCd() {
         return fdGrpCd;
     }
 
-    public void setFdGrpCd(String fdGrpCd) {
+    public void setFdGrpCd(int fdGrpCd) {
         this.fdGrpCd = fdGrpCd;
     }
 

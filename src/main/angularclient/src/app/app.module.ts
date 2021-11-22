@@ -1,11 +1,11 @@
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { AppComponent }  from './app.component';
-import { AppRoutingModule }        from './app.routing';
-import { HomeComponent } from './home/home.component';
-import { JournalComponent } from "./journal/journal.component";
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app.routing';
+import {HomeComponent} from './home/home.component';
+import {JournalComponent} from "./journal/journal.component";
 import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
 import {UserListComponent} from "./user-list/user-list.component";
@@ -15,6 +15,10 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {TokenInterceptor} from "./token-interceptor";
+
+import {HighlightDirective} from './directives/highlight.directive';
+import {FilterPipe} from "./pipes/filter.pipe";
+import {DateFilterPipe} from "./pipes/dateFilter.pipe";
 
 @NgModule({
   imports: [
@@ -36,6 +40,9 @@ import {TokenInterceptor} from "./token-interceptor";
     LoginComponent,
     SignupComponent,
     UserListComponent,
+    HighlightDirective,
+    FilterPipe,
+    DateFilterPipe
   ],
   providers: [
     {
@@ -47,4 +54,5 @@ import {TokenInterceptor} from "./token-interceptor";
   bootstrap: [AppComponent],
 })
 
-export class AppModule { }
+export class AppModule {
+}

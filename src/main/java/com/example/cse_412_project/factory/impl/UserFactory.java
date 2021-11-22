@@ -20,7 +20,6 @@ public class UserFactory implements IUserFactory {
     @Override
     public AppUser createUser(UserForm userForm) {
         AppUser user = new AppUser();
-        user.setEmail(userForm.getEmail());
         user.setPassword(userForm.getPassword());
         user.setUsername(userForm.getUsername());
 
