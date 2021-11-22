@@ -11,7 +11,6 @@
                      id="datePicker"
                      #datePicker
                      name="datepicker"
-                     [value]= "selectedDate"
                      (change)="changeSelectedDate(datePicker.value)"
                      min="2021-1-1" max="2022-11-20">
             </div>
@@ -94,22 +93,25 @@
               </tr>
               </thead>
               <tbody>
-              <ng-container *ngFor="let entry of journalEntries | dateFilter: selectedDate; let i=index">
-                <tr>
-                  <td class="first-column" colspan="2"><fa-icon (click)="deleteEntry(i)" class="delete-icon" [icon]="faTimes"></fa-icon>&nbsp; {{entry.long_desc}}</td>
+              <ng-container *ngFor="let entry of journalEntries; let i=index">
+                <tr *ngIf="this.sameDay(entry.journal_date, this.selectedDate.toISOString())">
+                  <td class="first-column"
+                      colspan="2">
+                    <fa-icon (click)="deleteEntry(i)" class="delete-icon" [icon]="faTimes">
+                    </fa-icon>&nbsp; {{entry.long_desc}}</td>
                   <td colspan="1">
                     <input class="entryAmountInput" type="number"
                            (change)="updateEntryAmount(i, $event)" value="{{entry.amount}}">
                   </td>
                   <td colspan="1">
-                    <select (change)="updateUnitAmount(i, $event)">
+                    <select (change)="updateUnitMeasureSequence(i, $event)">
                       <option *ngFor="let measure of entry.measurement"
                               [value]="measure.seq"
                               [selected]="measure.seq == entry.seq">
                         {{measure.measdesc}}
                       </option>
                     </select></td>
-                  <td class="last-column" colspan="1">TODO</td>
+                  <td class="last-column" colspan="1">{{getCaloriesForEntry(i)}}</td>
                 </tr>
               </ng-container>
               </tbody>

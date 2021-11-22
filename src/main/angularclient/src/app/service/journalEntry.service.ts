@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {JournalEntry, JournalEntryResponse} from '../model/journal-entry';
+import {JournalEntry, JournalEntryResponse, JournalEntryUpdate} from '../model/journal-entry';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -13,21 +13,23 @@ export class JournalEntryService {
   constructor(private http: HttpClient) {}
 
   public findAllByUsername(username: string): Observable<Array<JournalEntryResponse>> {
-    return this.http.get<Array<JournalEntryResponse>>('http://localhost:8082/api/journalentries/' + username);
+    return this.http.get<Array<JournalEntryResponse>>(this.journalEntryUrl + '/' + username);
   }
 
-  public createJournalEntry(journalEntry: JournalEntry): Observable<JournalEntry>{
+  public createJournalEntry(journalEntry: JournalEntry): Observable<JournalEntryResponse>{
     return this.http.post<any>(this.journalEntryUrl, journalEntry);
   }
 
-  // public updateJournalEntry(journalEntry: JournalEntry){
-  //   const url = `${this.journalEntryUrl}/${journalEntry.j_id}`;
-  //   return this.http.put<JournalEntry>(url, journalEntry)
-  // }
-  //
-  // public deleteJournalEntry(journalEntry: JournalEntry){
-  //   const url = `${this.journalEntryUrl}/${journalEntry.j_id}`;
-  //   return this.http.delete(url);
-  // }
+  public updateJournalEntry(journalEntryUpdate: JournalEntryUpdate): Observable<JournalEntryResponse>{
+    const url = `${this.journalEntryUrl}/${journalEntryUpdate.j_id}`;
+    return this.http.post<any>(url, journalEntryUpdate)
+  }
+
+  public deleteJournalEntry(j_id: number){
+    const url = `${this.journalEntryUrl}/${j_id}/delete`;
+    console.log(url);
+    console.log(j_id);
+    return this.http.delete(url);
+  }
 
 }

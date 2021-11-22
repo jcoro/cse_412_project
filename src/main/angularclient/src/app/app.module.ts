@@ -18,7 +18,6 @@ import {TokenInterceptor} from "./token-interceptor";
 
 import {HighlightDirective} from './directives/highlight.directive';
 import {FilterPipe} from "./pipes/filter.pipe";
-import {DateFilterPipe} from "./pipes/dateFilter.pipe";
 import {CommonModule} from "@angular/common";
 
 @NgModule({
@@ -43,8 +42,7 @@ import {CommonModule} from "@angular/common";
     SignupComponent,
     UserListComponent,
     HighlightDirective,
-    FilterPipe,
-    DateFilterPipe
+    FilterPipe
   ],
   providers: [
     {

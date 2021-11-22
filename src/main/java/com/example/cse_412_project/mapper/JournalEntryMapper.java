@@ -16,6 +16,7 @@ public abstract class JournalEntryMapper {
     @Autowired
     private UserRepository userRepository;
 
+    @Mapping(target="jId", source="journalEntryDto.jId")
     @Mapping(target="username", source="journalEntryDto.username")
     @Mapping(target="amount", source="journalEntryDto.amount")
     @Mapping(target="journalDate", source="journalEntryDto.journalDate")
