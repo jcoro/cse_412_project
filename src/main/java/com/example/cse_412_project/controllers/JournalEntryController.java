@@ -1,12 +1,13 @@
 package com.example.cse_412_project.controllers;
 
 import com.example.cse_412_project.DTO.JournalEntryDto;
+import com.example.cse_412_project.DTO.JournalEntryResponse;
 import com.example.cse_412_project.entities.JournalEntry;
 import com.example.cse_412_project.service.impl.JournalEntryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -15,13 +16,14 @@ public class JournalEntryController {
 
     private final JournalEntryService journalEntryService;
 
+    @Autowired
     public JournalEntryController(JournalEntryService journalEntryService) {
         this.journalEntryService = journalEntryService;
     }
 
     @GetMapping("/journalentries/{username}")
-    public Optional<JournalEntry> getJournalEntries(@PathVariable("username") String username) {
-        return journalEntryService.getAllByUsername(username);
+    public List<JournalEntryResponse> getJournalEntries(@PathVariable("username") String username) {
+        return journalEntryService.findAllDtoWithUsername(username);
     }
 
     @GetMapping("/journalentries")
@@ -30,7 +32,7 @@ public class JournalEntryController {
     }
 
     @PostMapping("/journalentries")
-    public void saveJournalEntry(@RequestBody JournalEntryDto journalEntryDto) {
-        journalEntryService.save(journalEntryDto);
+    public JournalEntry saveJournalEntry(@RequestBody JournalEntryDto journalEntryDto) {
+        return journalEntryService.save(journalEntryDto);
     }
 }

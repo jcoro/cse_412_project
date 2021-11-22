@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "./service/auth.service";
 import {Router} from "@angular/router";
 
@@ -8,9 +8,21 @@ import {Router} from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private authService: AuthService,
               private router: Router){}
+
+  ngOnInit(): void {
+    if(this.authService.isLoggedIn()) {
+      this.authService.refreshTokenForApp();
+    }
+    setInterval(() => {
+      if (this.authService.isLoggedIn()) {
+        this.authService.refreshTokenForApp();
+      }
+    }, 50000);
+  }
+
 
   logout() {
     this.authService.logout();

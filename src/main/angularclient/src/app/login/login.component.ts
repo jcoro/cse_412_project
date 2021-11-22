@@ -38,10 +38,6 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', Validators.required)
     });
 
-    setInterval(() => {
-      this.authService.refreshToken();
-    }, 50000);
-
     this.route.queryParams
       .subscribe(params => this.endpoint = params['return'] || '/login');
   }
@@ -62,6 +58,7 @@ export class LoginComponent implements OnInit {
       console.log(error);
       this.invalidCredential = false;
     });
+
     this.loading = false;
   }
 }

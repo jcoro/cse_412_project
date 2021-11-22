@@ -1,47 +1,45 @@
-package com.example.cse_412_project.entities;
+package com.example.cse_412_project.DTO;
 
-import com.example.cse_412_project.entities.impl.AppUser;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-
-@Entity
-@Table(name = "JOURNAL_ENTRY")
-public class JournalEntry {
-    @Id
-    @Column(name = "j_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class JournalEntryResponse {
+    @JsonProperty("jId")
     private int jId;
 
-    @Column(name="username", nullable = false)
+    @JsonProperty("username")
     private String username;
 
-    @Column(name = "amount")
+    @JsonProperty("amount")
     private float amount;
 
-    @Column(name = "journal_date")
+    @JsonProperty("journalDate")
     private LocalDateTime journalDate;
 
-    @Column(name = "order_index")
+    @JsonProperty("orderIndex")
     private int orderIndex;
 
-    @Column(name = "NDB_No", nullable = false)
+    @JsonProperty("ndbNo")
     private int ndbNo;
 
-    @Column(name = "seq", nullable = false)
+    @JsonProperty("seq")
     private int seq;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
-    @JoinColumn(name = "username", referencedColumnName = "username", insertable=false, updatable=false)
-    private AppUser user;
-
-    public int getjId() {
-        return jId;
-    }
-
-    public void setjId(int jId) {
+    public JournalEntryResponse(int jId,
+                           String username,
+                           float amount,
+                           LocalDateTime journalDate,
+                           int orderIndex,
+                           int ndbNo,
+                           int seq) {
         this.jId = jId;
+        this.username = username;
+        this.amount = amount;
+        this.journalDate = journalDate;
+        this.orderIndex = orderIndex;
+        this.ndbNo = ndbNo;
+        this.seq = seq;
     }
 
     public String getUsername() {
@@ -92,11 +90,11 @@ public class JournalEntry {
         this.seq = seq;
     }
 
-    public AppUser getUser() {
-        return user;
+    public int getjId() {
+        return jId;
     }
 
-    public void setUser(AppUser user) {
-        this.user = user;
+    public void setjId(int jId) {
+        this.jId = jId;
     }
 }

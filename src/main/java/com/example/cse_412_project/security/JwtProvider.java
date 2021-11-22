@@ -45,8 +45,16 @@ public class JwtProvider {
     }
 
     public String generateToken(String username) {
-        return Jwts.builder()
+        List<GrantedAuthority> grantedAuthorities = AuthorityUtils
+                .commaSeparatedStringToAuthorityList("ROLE_USER");
+
+        return "Bearer " + Jwts.builder()
+                .setId("softtekJWT")
                 .setSubject(username)
+                .claim("authorities",
+                        grantedAuthorities.stream()
+                                .map(GrantedAuthority::getAuthority)
+                                .collect(Collectors.toList()))
                 .setIssuedAt(Date.from(Instant.now()))
                 .signWith(SignatureAlgorithm.HS512,
                         SECRETKEY.getBytes())

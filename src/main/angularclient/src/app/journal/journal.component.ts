@@ -5,6 +5,7 @@ import {FoodService} from "../service/food.service";
 import {JournalEntryService} from "../service/journalEntry.service";
 import {Food} from "../model/food";
 import {JournalEntry} from "../model/journal-entry";
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'journal',
@@ -25,7 +26,9 @@ export class JournalComponent {
   toggleSugarButtonName: any = 'Show';
   toggleFatButtonName: any = 'Show';
   toggleVitsButtonName: any = 'Show';
-  constructor(private FoodService: FoodService, private JournalEntryService: JournalEntryService) {
+  constructor(private FoodService: FoodService,
+              private JournalEntryService: JournalEntryService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -35,6 +38,14 @@ export class JournalComponent {
       console.log("ERROR fetching Foods")
       console.log(error)
     });
+    this.JournalEntryService.findAllByUsername(this.authService.getUserName()).subscribe(data => {
+      if (data != null) {
+        this.journalEntries.push(...data);
+      }
+    }, error => {
+      console.log("ERROR fetching Journal Entries");
+      console.log(error);
+    });
   }
 
   changeSelectedDate(value) {
@@ -42,14 +53,19 @@ export class JournalComponent {
   }
 
   selectFood(food) {
+    console.log('select');
     this.searchText = '';
-    let entry = new JournalEntry();
-    entry.username = 'user'
-    entry.amount = 1;
-    entry.journalDate = this.selectedDate;
-    entry.orderIndex = this.journalEntries.length;
-    entry.ndbNo = food.ndbNo;
-    this.JournalEntryService.createJournalEntry(entry);
+    const entry: JournalEntry = {
+      username: this.authService.getUserName(),
+      amount: 1,
+      journalDate: new Date(this.selectedDate),
+      orderIndex: this.journalEntries.length,
+      ndbNo: food.ndbNo,
+      seq: 0
+    };
+    this.JournalEntryService.createJournalEntry(entry).subscribe(data => {
+      this.journalEntries.push(data);
+    });
   }
 
   updateEntryAmount(i, event) {

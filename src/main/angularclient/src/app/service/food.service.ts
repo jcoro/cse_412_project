@@ -17,7 +17,7 @@ export class FoodService {
   public findAll(): Observable<Food[]> {
     let result = this.http.get<Food[]>(this.foodUrl);
     console.log(result)
-    return result
+    return result;
   }
 
 }

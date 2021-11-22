@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {JournalEntry} from '../model/journal-entry';
+import {JournalEntry, JournalEntryResponse} from '../model/journal-entry';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -8,20 +8,18 @@ import {Observable} from 'rxjs';
 })
 export class JournalEntryService {
 
-  private journalEntryUrl: string;
+  private journalEntryUrl: string = 'http://localhost:8082/api/journalentries';
 
-  constructor(private http: HttpClient) {
-    this.journalEntryUrl = 'http://localhost:8082/api/journalentries'
+  constructor(private http: HttpClient) {}
+
+  public findAllByUsername(username: string): Observable<Array<JournalEntryResponse>> {
+    let result = this.http.get<Array<JournalEntryResponse>>('http://localhost:8082/api/journalentries/' + username);
+    console.log(result);
+    return result;
   }
 
-  // public findAllByUsername(username: string): Observable<JournalEntry[]> {
-  //   const url = `${this.journalEntryUrl}/${username}`;
-  //   let result = this.http.get<JournalEntry[]>(url);
-  //   return result
-  // }
-
   public createJournalEntry(journalEntry: JournalEntry): Observable<JournalEntry>{
-    return this.http.post<JournalEntry>(this.journalEntryUrl, journalEntry);
+    return this.http.post<any>(this.journalEntryUrl, journalEntry);
   }
 
   // public updateJournalEntry(journalEntry: JournalEntry){

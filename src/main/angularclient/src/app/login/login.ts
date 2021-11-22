@@ -8,3 +8,7 @@ export interface LoginResponse {
   expiresAt: Date;
   username: string;
 }
+export interface RefreshTokenRequest {
+  refreshToken: string;
+  username: string;
+}
