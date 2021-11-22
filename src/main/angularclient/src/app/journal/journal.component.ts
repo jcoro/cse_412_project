@@ -53,7 +53,6 @@ export class JournalComponent {
   }
 
   selectFood(food) {
-    console.log('select');
     this.searchText = '';
     const entry: JournalEntry = {
       username: this.authService.getUserName(),

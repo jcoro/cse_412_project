@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {JournalEntry, JournalEntryResponse} from '../model/journal-entry';
 import {Observable} from 'rxjs';
 
@@ -13,9 +13,7 @@ export class JournalEntryService {
   constructor(private http: HttpClient) {}
 
   public findAllByUsername(username: string): Observable<Array<JournalEntryResponse>> {
-    let result = this.http.get<Array<JournalEntryResponse>>('http://localhost:8082/api/journalentries/' + username);
-    console.log(result);
-    return result;
+    return this.http.get<Array<JournalEntryResponse>>('http://localhost:8082/api/journalentries/' + username);
   }
 
   public createJournalEntry(journalEntry: JournalEntry): Observable<JournalEntry>{

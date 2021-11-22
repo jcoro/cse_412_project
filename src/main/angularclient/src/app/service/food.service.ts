@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Food} from '../model/food';
 import {Observable} from 'rxjs';
 
@@ -15,9 +15,7 @@ export class FoodService {
   }
 
   public findAll(): Observable<Food[]> {
-    let result = this.http.get<Food[]>(this.foodUrl);
-    console.log(result)
-    return result;
+    return this.http.get<Food[]>(this.foodUrl);
   }
 
 }

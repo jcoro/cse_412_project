@@ -48,8 +48,7 @@ export class LoginComponent implements OnInit {
     this.loginRequest.username = this.loginForm.get('username').value;
     this.loginRequest.password = this.loginForm.get('password').value;
 
-    this.authService.login(this.loginRequest).subscribe(data => {
-      console.log(data);
+    this.authService.login(this.loginRequest).subscribe(() => {
       this.isError = false;
       this.invalidCredential = true;
       this.router.navigateByUrl(this.endpoint.includes('login') ? '/home' : this.endpoint);
