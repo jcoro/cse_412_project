@@ -1,14 +1,20 @@
 package com.example.cse_412_project.entities.impl;
 
-import java.time.Instant;
+import com.example.cse_412_project.entities.IAppUser;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Set;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
-public class AppUser {
+public class AppUser implements UserDetails, IAppUser {
 
     @Id
     @NotBlank(message = "Username is required")
@@ -17,51 +23,85 @@ public class AppUser {
     @NotBlank(message = "Password is required")
     private String password;
 
-    @Email
-    @NotEmpty(message = "Email is required")
-    private String email;
-
-    private Instant created;
-
+    @ElementCollection(targetClass=SimpleGrantedAuthority.class, fetch= FetchType.EAGER)
+    private Set<SimpleGrantedAuthority> roles;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
     private boolean enabled;
-    
+
+    @Override
     public String getUsername() {
         return username;
     }
-    
+
+    @Override
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    @Override
     public String getPassword() {
         return password;
     }
 
+    @Override
     public void setPassword(String password) {
         this.password = password;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return this.accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return this.accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return this.credentialsNonExpired;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles;
+    }
+
+    @Override
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    @Override
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    @Override
+    public void setAccountNonExpired(boolean accountNonExpired ) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    @Override
+    public void setRoles(Set<SimpleGrantedAuthority> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public Set<SimpleGrantedAuthority> getRoles() {
+        return roles;
+    }
+
+    @Override
     public boolean isEnabled() {
         return enabled;
     }
 
+    @Override
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public Instant getCreated() {
-        return created;
-    }
-
-    public void setCreated(Instant created) {
-        this.created = created;
     }
 }

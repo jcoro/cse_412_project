@@ -2,13 +2,9 @@ package com.example.cse_412_project.controllers;
 
 import com.example.cse_412_project.entities.impl.AppUser;
 import com.example.cse_412_project.repositories.UserRepository;
-
-import java.security.Principal;
 import java.util.*;
-
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * UserController.java - DESCRIPTION
@@ -27,7 +23,7 @@ public class UserController {
 
     @GetMapping("/users")
     public List<AppUser> getUsers() {
-        return (List<AppUser>) userRepository.findAll();
+        return userRepository.findAll();
     }
 
     @PostMapping("/users")

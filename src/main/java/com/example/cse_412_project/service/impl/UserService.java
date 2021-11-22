@@ -81,10 +81,6 @@ public class UserService {
         return foundUser.orElse(null);
     }
 
-    public AppUser findByEmail(String email) {
-        return userRepository.findByEmail(email).get();
-    }
-
     public List<AppUser> findAll() {
         Iterable<AppUser> users = userRepository.findAll();
         List<AppUser> results = new ArrayList<>();
