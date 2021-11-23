@@ -14,11 +14,6 @@ body {
   width: 100%;
 }
 
-.container {
-  min-width: 100vw !important;
-  padding-right: 35px;
-}
-
 main {
   padding-top: 40px;
 }
@@ -70,7 +65,6 @@ select.foodgroups {
 #search-results {
   margin-top: 10px;
   padding-left: 0;
-  width: 40vw;
 }
 
 #quicktable-container {
@@ -149,8 +143,9 @@ th.header-label.amount {
 
 .main-table {
   position: relative;
-  /*max-width: 1000px;*/
-  width: 55vw;
+  max-width: 1000px;
+  margin-left: 30px;
+  margin-right: 30px;
   margin-top: 15px;
   border: 1px solid lightgray;
   min-height: 415px;
@@ -167,6 +162,7 @@ table#foodlist {
   border-spacing: 0 3px;
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 15px;
+  width: 900px;
 }
 
 table#foodlist.data :not(thead) tr {
@@ -935,9 +931,3 @@ button, input, optgroup, select, textarea {
   font: inherit;
   margin: 0;
 }
-
-
-
-
-
-

@@ -9,11 +9,6 @@ import java.time.LocalDateTime;
 
 public class JournalEntryDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @JsonProperty("j_id")
-    private int jId;
-
     @JsonProperty("username")
     private String username;
 
@@ -31,14 +26,6 @@ public class JournalEntryDto {
 
     @JsonProperty("seq")
     private int seq;
-
-    public int getjId() {
-        return jId;
-    }
-
-    public void setjId(int jId) {
-        this.jId = jId;
-    }
 
     public String getUsername() {
         return username;

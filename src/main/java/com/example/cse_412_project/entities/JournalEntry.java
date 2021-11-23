@@ -12,7 +12,7 @@ import java.util.Set;
 public class JournalEntry {
     @Id
     @Column(name = "j_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int jId;
 
     @Column(name="username", nullable = false)

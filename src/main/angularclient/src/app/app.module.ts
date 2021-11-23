@@ -19,6 +19,9 @@ import {TokenInterceptor} from "./token-interceptor";
 import {HighlightDirective} from './directives/highlight.directive';
 import {FilterPipe} from "./pipes/filter.pipe";
 import {CommonModule} from "@angular/common";
+import {MatIconModule} from "@angular/material/icon";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 @NgModule({
   imports: [
@@ -32,7 +35,10 @@ import {CommonModule} from "@angular/common";
     FontAwesomeModule,
     NgbModule,
     MatSnackBarModule,
-    CommonModule
+    CommonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatDatepickerModule
   ],
   declarations: [
     AppComponent,

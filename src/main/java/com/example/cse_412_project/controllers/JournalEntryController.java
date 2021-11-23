@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
 public class JournalEntryController {
 
@@ -43,8 +43,7 @@ public class JournalEntryController {
     }
 
     @PostMapping("/journalentries/{id}/delete")
-    public void deleteJournalEntry(@PathVariable("id") int id,
-                                   @RequestBody JournalEntryDto journalEntryDto){
+    public void deleteJournalEntry(@PathVariable("id") int id, @RequestBody JournalEntryDto journalEntryDto){
         journalEntryService.deleteJournalEntry(id);
     }
 }

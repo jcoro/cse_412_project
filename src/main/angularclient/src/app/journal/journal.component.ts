@@ -65,10 +65,10 @@ export class JournalComponent {
     } else {
       month = month - 1
     }
-    let date = new Date()
-    date.setFullYear(dateArray[0])
-    date.setMonth(month)
-    date.setDate(dateArray[2])
+    let date = new Date();
+    date.setFullYear(+dateArray[0]);
+    date.setMonth(month);
+    date.setDate(+dateArray[2]);
     this.selectedDate = date;
   }
 
@@ -147,11 +147,11 @@ export class JournalComponent {
   }
 
   deleteEntry(i) {
-    let j_id = this.journalEntries[i].j_id
-    this.journalEntries = this.journalEntries.filter((e,index) => index !== i);
-    this.JournalEntryService.deleteJournalEntry(j_id).subscribe({
+    let j_id = this.journalEntries[i].j_id;
+    this.JournalEntryService.deleteJournalEntry(j_id, this.journalEntries[i]).subscribe({
       next: data => {
         console.log('Delete successful');
+        this.journalEntries = this.journalEntries.filter((e,index) => index !== i);
       },
       error: error => {
         console.error('There was an error deleting the entry', error.message);

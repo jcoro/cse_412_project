@@ -25,11 +25,10 @@ export class JournalEntryService {
     return this.http.post<any>(url, journalEntryUpdate)
   }
 
-  public deleteJournalEntry(j_id: number){
+  public deleteJournalEntry(j_id: number, journalEntry){
     const url = `${this.journalEntryUrl}/${j_id}/delete`;
-    console.log(url);
-    console.log(j_id);
-    return this.http.delete(url);
+    console.log(journalEntry);
+    return this.http.post(url, journalEntry);
   }
 
 }
