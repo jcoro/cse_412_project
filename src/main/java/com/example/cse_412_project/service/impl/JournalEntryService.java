@@ -7,9 +7,13 @@ import com.example.cse_412_project.mapper.JournalEntryMapper;
 import com.example.cse_412_project.repositories.FoodDescriptionRepository;
 import com.example.cse_412_project.repositories.JournalEntryRepository;
 import lombok.AllArgsConstructor;
+import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +29,13 @@ public class JournalEntryService {
 
     public JournalEntryResponse save(JournalEntryDto journalEntryDto) {
         new JournalEntry();
+        LocalDateTime oldDateTime = LocalDateTime.parse(journalEntryDto.getJournalDate().toString());
+        ZoneId oldZone = ZoneId.of("Etc/Greenwich");
+        ZoneId newZone = ZoneId.systemDefault();
+        LocalDateTime newDateTime = oldDateTime.atZone(oldZone)
+                .withZoneSameInstant(newZone)
+                .toLocalDateTime();
+        journalEntryDto.setJournalDate(newDateTime);
         JournalEntry journalEntry;
         // Save the journal entry via the JournalEntryDTO
         journalEntry = journalEntryRepository.save(journalEntryMapper.mapJournalEntryDTOtoJournalEntry(journalEntryDto));

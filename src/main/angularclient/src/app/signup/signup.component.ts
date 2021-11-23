@@ -15,7 +15,7 @@ export class SignupComponent implements OnInit {
     private router: Router,
   ) {
     if (authService.isLoggedIn()) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/journal']);
     }
   }
 

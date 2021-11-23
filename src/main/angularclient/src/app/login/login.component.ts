@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) {
     if (authService.isLoggedIn()) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/journal']);
     }
     this.loginRequest = {
       username: '',
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginRequest).subscribe(() => {
       this.isError = false;
       this.invalidCredential = true;
-      this.router.navigateByUrl(this.endpoint.includes('login') ? '/home' : this.endpoint);
+      this.router.navigateByUrl(this.endpoint.includes('login') ? '/journal' : this.endpoint);
     }, error => {
       this.isError = true;
       console.log(error);

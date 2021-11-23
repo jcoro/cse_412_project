@@ -4,7 +4,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app.routing';
-import {HomeComponent} from './home/home.component';
 import {JournalComponent} from "./journal/journal.component";
 import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
@@ -42,7 +41,6 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
   ],
   declarations: [
     AppComponent,
-    HomeComponent,
     JournalComponent,
     LoginComponent,
     SignupComponent,
