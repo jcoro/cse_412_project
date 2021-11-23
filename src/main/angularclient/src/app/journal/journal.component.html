@@ -1,93 +1,30 @@
-
 <!-- TOP NAV -->
 <!-- PAGE TITLE -->
 <main class="container wrapper">
   <section>
     <div id="search-bar">
       <div class="form-group">
-        <div class="col-md-12">
-          <select class="foodgroups">
-            <option value="" selected>
-              All Food Groups
-            </option>
-            <option value="0100">
-              Dairy and Egg Products
-            </option>
-            <option value="0200">
-              Spices and Herbs
-            </option>
-            <option value="0300">
-              Baby Foods
-            </option>
-            <option value="0400">
-              Fats and Oils
-            </option>
-            <option value="0500">
-              Poultry Products
-            </option>
-            <option value="0600">
-              Soups, Sauces, and Gravies
-            </option>
-            <option value="0700">
-              Sausages and Luncheon Meats
-            </option>
-            <option value="0800">
-              Breakfast Cereals
-            </option>
-            <option value="0900">
-              Fruits and Fruit Juices
-            </option>
-            <option value="1000">
-              Pork Products
-            </option>
-            <option value="1100">
-              Vegetables and Vegetable Products
-            </option>
-            <option value="1200">
-              Nut and Seed Products
-            </option>
-            <option value="1300">
-              Beef Products
-            </option>
-            <option value="1400">
-              Beverages
-            </option>
-            <option value="1500">
-              Finfish and Shellfish Products
-            </option>
-            <option value="1600">
-              Legumes and Legume Products
-            </option>
-            <option value="1700">
-              Lamb, Veal, and Game Products
-            </option>
-            <option value="1800">
-              Baked Products
-            </option>
-            <option value="1900">
-              Sweets
-            </option>
-            <option value="2000">
-              Cereal Grains and Pasta
-            </option>
-            <option value="2100">
-              Fast Foods
-            </option>
-            <option value="2200">
-              Meals, Entrees, and Side Dishes
-            </option>
-            <option value="2300">
-              Snacks
-            </option>
-            <option value="2400">
-              American Indian/Alaska Native Foods
-            </option>
-            <option value="2500">
-              Restaurant Foods
-            </option>
-          </select>
-          <input type="text" class="form-control"
-                 placeholder="Search Foods">
+        <div class="row">
+          <div class="col-md-12">
+            <div>
+              <input type="date"
+                     id="datePicker"
+                     #datePicker
+                     name="datepicker"
+                     (change)="changeSelectedDate(datePicker.value)"
+                     min="2021-1-1" max="2022-11-20">
+            </div>
+            <div>
+              <select class="foodgroups" [formControl]="selectedFoodGroup">
+                <option *ngFor="let foodGroup of foodGroups" [ngValue]="foodGroup.foodGrpCode">{{foodGroup.foodGrpDesc}}</option>
+              </select>
+            </div>
+            <input type="text" class="form-control"
+                   id="search-text"
+                   aria-describedby="search-text"
+                   [(ngModel)]="searchText"
+                   placeholder="Search Foods">
+          </div>
         </div>
         <div class="col-md-12">
           <div style="margin: 10px;">
@@ -110,14 +47,23 @@
                   </thead>
                   <tbody>
                   <!-- Repeat Food Query Row -->
-                  <tr>
-                    <td>
-                      <a>
-                      </a>
-                    </td>
-                    <td>
-                    </td>
-                  </tr>
+                  <ng-container *ngFor="let food of foods | appFilter: searchText:selectedFoodGroup.value | slice:0:20">
+                    <tr *ngIf="searchText != ''">
+                      <td class="searched-food">
+                        <a appHighlight
+                           [searchedWord]="searchText"
+                           [content]="food.longDesc"
+                           [classToApply]="'font-weight-bold'"
+                           [setTitle]='true'
+                           [href]=""
+                           (click)="selectFood(food)">{{food.longDesc}}</a>
+                      </td>
+                      <td>
+                        USDA
+                      </td>
+                    </tr>
+                  </ng-container>
+
                   </tbody>
                 </table>
               </div>
@@ -135,12 +81,34 @@
               <thead class="header-bar">
               <tr>
                 <th colspan="2" class="header-label food">FOOD</th>
-                <th colspan="1" class="header-label quantity">QUANTITY</th>
+                <th colspan="1" class="header-label amount">AMOUNT</th>
                 <th colspan="1" class="header-label unit">UNIT</th>
                 <th colspan="1" class="header-label calories">CALORIES</th>
               </tr>
               </thead>
               <tbody>
+              <ng-container *ngFor="let entry of journalEntries; let i=index">
+                <tr *ngIf="this.sameDay(entry.journal_date, this.selectedDate.toISOString())">
+                  <td class="first-column"
+                      colspan="2">
+                    <fa-icon (click)="deleteEntry(i)" class="delete-icon" [icon]="faTimes"></fa-icon>
+<!--                    <mat-icon (click)="deleteEntry(i)">delete</mat-icon>-->
+                    &nbsp; {{entry.long_desc}}</td>
+                  <td colspan="1">
+                    <input class="entryAmountInput" type="number"
+                           (change)="updateEntryAmount(i, $event)" value="{{entry.amount}}">
+                  </td>
+                  <td colspan="1">
+                    <select (change)="updateUnitMeasureSequence(i, $event)">
+                      <option *ngFor="let measure of entry.measurement"
+                              [value]="measure.seq"
+                              [selected]="measure.seq == entry.seq">
+                        {{measure.measdesc}}
+                      </option>
+                    </select></td>
+                  <td class="last-column" colspan="1">{{getCaloriesForEntry(i)}}</td>
+                </tr>
+              </ng-container>
               </tbody>
             </table>
           </div>
@@ -4240,40 +4208,3 @@
     <!-- end row -->
   </section>
 </main>
-<!-- FOOTER -->
-<footer>
-  <!-- copyright , scrollTo Top -->
-  <div class="footer-bar">
-    <div class="container">
-      <span class="copyright">Copyright &copy; 2021</span>
-    </div>
-  </div>
-  <!-- copyright , scrollTo Top -->
-  <!-- footer content -->
-  <div class="footer-content">
-    <div class="container">
-      <div class="row">
-        <!-- FOOTER CONTACT INFO -->
-        <div class="column col-md-4">
-          <div class="font-opensans">
-          </div>
-          <p class="contact-desc">
-          </p>
-        </div>
-        <!-- /FOOTER CONTACT INFO -->
-        <!-- FOOTER LOGO -->
-        <div class="column logo col-md-4 text-center">
-
-        </div>
-        <!-- /FOOTER LOGO -->
-        <!-- FOOTER LATEST POSTS -->
-        <div class="column col-md-4 text-right">
-        </div>
-        <!-- /FOOTER LATEST POSTS -->
-      </div>
-    </div>
-  </div>
-  <!-- footer content -->
-</footer>
-<!-- /FOOTER -->
-

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoginRequest } from './login';
-import { Router, ActivatedRoute } from '@angular/router';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {LoginRequest} from './login';
+import {Router, ActivatedRoute} from '@angular/router';
 import {AuthService} from "../service/auth.service";
 
 @Component({
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) {
     if (authService.isLoggedIn()) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/journal']);
     }
     this.loginRequest = {
       username: '',
@@ -38,10 +38,6 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', Validators.required)
     });
 
-    setInterval(() => {
-      this.authService.refreshToken();
-    }, 50000);
-
     this.route.queryParams
       .subscribe(params => this.endpoint = params['return'] || '/login');
   }
@@ -52,16 +48,16 @@ export class LoginComponent implements OnInit {
     this.loginRequest.username = this.loginForm.get('username').value;
     this.loginRequest.password = this.loginForm.get('password').value;
 
-    this.authService.login(this.loginRequest).subscribe(data => {
-      console.log(data);
+    this.authService.login(this.loginRequest).subscribe(() => {
       this.isError = false;
       this.invalidCredential = true;
-      this.router.navigateByUrl(this.endpoint.includes('login') ? '/home' : this.endpoint);
+      this.router.navigateByUrl(this.endpoint.includes('login') ? '/journal' : this.endpoint);
     }, error => {
       this.isError = true;
       console.log(error);
       this.invalidCredential = false;
     });
+
     this.loading = false;
   }
 }

@@ -1,11 +1,10 @@
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { AppComponent }  from './app.component';
-import { AppRoutingModule }        from './app.routing';
-import { HomeComponent } from './home/home.component';
-import { JournalComponent } from "./journal/journal.component";
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app.routing';
+import {JournalComponent} from "./journal/journal.component";
 import {LoginComponent} from "./login/login.component";
 import {SignupComponent} from "./signup/signup.component";
 import {UserListComponent} from "./user-list/user-list.component";
@@ -15,6 +14,13 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {TokenInterceptor} from "./token-interceptor";
+
+import {HighlightDirective} from './directives/highlight.directive';
+import {FilterPipe} from "./pipes/filter.pipe";
+import {CommonModule} from "@angular/common";
+import {MatIconModule} from "@angular/material/icon";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 @NgModule({
   imports: [
@@ -27,15 +33,20 @@ import {TokenInterceptor} from "./token-interceptor";
     BrowserAnimationsModule,
     FontAwesomeModule,
     NgbModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CommonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatDatepickerModule
   ],
   declarations: [
     AppComponent,
-    HomeComponent,
     JournalComponent,
     LoginComponent,
     SignupComponent,
     UserListComponent,
+    HighlightDirective,
+    FilterPipe
   ],
   providers: [
     {
@@ -47,4 +58,5 @@ import {TokenInterceptor} from "./token-interceptor";
   bootstrap: [AppComponent],
 })
 
-export class AppModule { }
+export class AppModule {
+}

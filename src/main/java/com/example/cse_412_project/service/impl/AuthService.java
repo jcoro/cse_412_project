@@ -4,6 +4,7 @@ import com.example.cse_412_project.DTO.AuthenticationResponse;
 import com.example.cse_412_project.DTO.LoginRequest;
 import com.example.cse_412_project.DTO.RefreshTokenRequest;
 import com.example.cse_412_project.DTO.RegisterRequest;
+import com.example.cse_412_project.entities.Role;
 import com.example.cse_412_project.entities.impl.AppUser;
 import com.example.cse_412_project.repositories.UserRepository;
 import com.example.cse_412_project.security.JwtProvider;
@@ -11,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Valid;
 import java.time.Instant;
+import java.util.Collections;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -51,11 +54,12 @@ public class AuthService {
         AppUser user = new AppUser();
         user.setUsername(registerRequest.getUsername());
         user.setPassword(bCryptPasswordEncoder.encode(registerRequest.getPassword()));
-        user.setEmail(registerRequest.getEmail());
-        user.setCreated(Instant.now());
-
+        user.setRoles(Collections.singleton(new SimpleGrantedAuthority(Role.USER)));
         // we can set this to false if we use token => after validating token, set it to true
         user.setEnabled(true);
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
         userRepository.save(user);
         return true;
     }
