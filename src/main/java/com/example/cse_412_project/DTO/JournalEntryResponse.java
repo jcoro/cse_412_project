@@ -176,8 +176,12 @@ public class JournalEntryResponse {
         Optional<FoodDescription> foodDescription = foodDescriptionRepository.findByNdbNo(journalEntry.getNdbNo());
         if (foodDescription.isPresent()) {
             weights = foodDescription.get().getWeights();
+            int sequenceSize = weights.size();
             weights.forEach(w -> weightDtos.add(new WeightDto(w.getWeightKey().getSeq(),
                     w.getGramWeight(), w.getDescription())));
+            // not all foods have weight data - add grams and ounces for all foods
+            weightDtos.add(new WeightDto(++sequenceSize, 1, "Gram(s)"));
+            weightDtos.add(new WeightDto(++sequenceSize, 28.3495f, "Ounce(s)"));
         }
         return weightDtos;
     }
