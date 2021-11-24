@@ -15,10 +15,12 @@ import {FormControl} from "@angular/forms";
 export class JournalComponent {
   faTimes = faTimes;
   selectedDate: Date = new Date(Date.now());
+  selectedDateString: string = this.selectedDate.toISOString().substring(0,10);
   searchText = '';
   selectedFoodGroup = new FormControl(0);
   foods: Food[];
   journalEntries: JournalEntryResponse[] = [];
+  daysJournalEntries: JournalEntryResponse[] = [];
   showSugars: boolean = false;
   showFat: boolean = false;
   showVits: boolean = false;
@@ -26,12 +28,12 @@ export class JournalComponent {
   toggleFatButtonName: any = 'Show';
   toggleVitsButtonName: any = 'Show';
   foodGroups = [];
+
   constructor(private FoodService: FoodService,
               private JournalEntryService: JournalEntryService,
               private authService: AuthService,
               private foodGroupService: FoodGroupService) {
   }
-
 
   ngOnInit(): void {
     this.foodGroupService.findAll().subscribe(data => {
@@ -50,6 +52,7 @@ export class JournalComponent {
     this.JournalEntryService.findAllByUsername(this.authService.getUserName()).subscribe(data => {
       if (data != null) {
         this.journalEntries.push(...data);
+        // this.getSelectedDaysJournalEntries()
       }
     }, error => {
       console.log("ERROR fetching Journal Entries");
@@ -60,7 +63,7 @@ export class JournalComponent {
   changeSelectedDate(value) {
     let dateArray = value.split('-')
     let month = +dateArray[1]
-    if (month === 1){
+    if (month === 1) {
       month = 12;
     } else {
       month = month - 1
@@ -70,14 +73,35 @@ export class JournalComponent {
     date.setMonth(month);
     date.setDate(+dateArray[2]);
     this.selectedDate = date;
+    this.getSelectedDaysJournalEntries();
   }
 
-  sameDay(d1, d2) {
-    let date1 = new Date(d1);
-    let date2 = new Date(d2);
+  sameDay(entry) {
+    let currentDate;
+    if (this == undefined) {
+      currentDate = new Date(Date.now());
+    } else {
+      currentDate = this.selectedDate;
+    }
+    let date1 = new Date(entry.journal_date);
+    let date2 = new Date(currentDate.toISOString());
+
     return date1.getFullYear() === date2.getFullYear() &&
       date1.getMonth() === date2.getMonth() &&
       date1.getDate() === date2.getDate();
+  }
+
+  getSelectedDaysJournalEntries() {
+    let date2 = this.selectedDate;
+    this.daysJournalEntries = [];
+    this.journalEntries.forEach((e) => {
+      let date1 = new Date(e.journal_date);
+      if (date1.getFullYear() === date2.getFullYear() &&
+        date1.getMonth() === date2.getMonth() &&
+        date1.getDate() === date2.getDate()){
+        this.daysJournalEntries.push(e);
+      }
+    })
   }
 
   selectFood(food) {
@@ -100,37 +124,42 @@ export class JournalComponent {
         amount: data.amount,
         seq: data.seq,
         ndb_no: data.ndb_no,
-        long_desc:data.long_desc,
+        long_desc: data.long_desc,
         fdgrp_cd: data.fdgrp_cd,
         measurement: data.measurement,
         nutrient_value: data.nutrient_value
       }
       this.journalEntries.push(journalEntryResponse);
+      this.getSelectedDaysJournalEntries();
     });
   }
 
-  updateEntryAmount(i, event) {
-    this.journalEntries[i].amount = +event.target.value;
-    this.editJournalEntry(i);
+  updateEntryAmount(entry, event) {
+    entry.amount = +event.target.value;
+    this.journalEntries[this.journalEntries.indexOf(this.journalEntries.find(e => e.j_id === entry.j_id))].amount = +event.target.value;
+    this.journalEntries.find(e => e.j_id === entry.j_id).amount = +event.target.value;
+    this.editJournalEntry(entry);
+    this.getSelectedDaysJournalEntries();
   }
 
-  updateUnitMeasureSequence(i, event) {
-    this.journalEntries[i].seq = +event.target.value;
-    this.editJournalEntry(i);
+  updateUnitMeasureSequence(entry, event) {
+    entry.seq = +event.target.value;
+    this.journalEntries[this.journalEntries.indexOf(this.journalEntries.find(e => e.j_id === entry.j_id))].seq = +event.target.value;
+    this.editJournalEntry(entry);
   }
 
-  editJournalEntry(i){
+  editJournalEntry(updatedEntry) {
     const entry: JournalEntryUpdate = {
-      j_id: this.journalEntries[i].j_id,
-      username: this.journalEntries[i].username,
-      journal_date: this.journalEntries[i].journal_date,
-      order_index: this.journalEntries[i].order_index,
-      amount: this.journalEntries[i].amount,
-      seq: this.journalEntries[i].seq,
-      ndb_no: this.journalEntries[i].ndb_no
+      j_id: updatedEntry.j_id,
+      username: updatedEntry.username,
+      journal_date: updatedEntry.journal_date,
+      order_index: updatedEntry.order_index,
+      amount: updatedEntry.amount,
+      seq: updatedEntry.seq,
+      ndb_no: updatedEntry.ndb_no
     }
     this.JournalEntryService.updateJournalEntry(entry).subscribe(data => {
-      this.journalEntries[i] = {
+      this.journalEntries[this.journalEntries.indexOf(this.journalEntries.find(e => e.j_id === data.j_id))] = {
         j_id: data.j_id,
         username: data.username,
         journal_date: data.journal_date,
@@ -146,12 +175,13 @@ export class JournalComponent {
     });
   }
 
-  deleteEntry(i) {
-    let j_id = this.journalEntries[i].j_id;
-    this.JournalEntryService.deleteJournalEntry(j_id, this.journalEntries[i]).subscribe({
+  deleteEntry(entry) {
+    let j_id = entry.j_id;
+    this.JournalEntryService.deleteJournalEntry(j_id, entry).subscribe({
       next: data => {
-        console.log('Delete successful');
-        this.journalEntries = this.journalEntries.filter((e,index) => index !== i);
+        console.log('Delete successful ', data);
+        this.journalEntries = this.journalEntries.filter((e) => e.j_id !== j_id);
+        this.getSelectedDaysJournalEntries();
       },
       error: error => {
         console.error('There was an error deleting the entry', error.message);
@@ -160,10 +190,51 @@ export class JournalComponent {
   }
 
   getCaloriesForEntry(i) {
-    if (this.journalEntries.length > 0) {
-      let gramweight = +this.journalEntries[i].measurement.find(m => m.seq === this.journalEntries[i].seq).gramweight;
-      return Math.round((this.journalEntries[i].amount * gramweight * this.journalEntries[i].nutrient_value.find(nv => nv.nutrNo === 208).nutrVal) / 100);
+    if (this.daysJournalEntries.length > 0) {
+      let gramweight = +this.daysJournalEntries[i].measurement.find(m => m.seq === this.daysJournalEntries[i].seq).gramweight;
+      return Math.round((this.daysJournalEntries[i].amount * gramweight * this.daysJournalEntries[i].nutrient_value.find(nv => nv.nutrNo === 208).nutrVal) / 100);
     }
+  }
+
+  calculateTotal(nutrientNumber) {
+    let total = 0
+    if (this.daysJournalEntries.length > 0) {
+      this.daysJournalEntries.forEach(function (entry) {
+        let gramweight = +entry.measurement.find(m => m.seq === entry.seq).gramweight;
+        let nutrient_value = entry.nutrient_value.find(nv => nv.nutrNo === nutrientNumber);
+        if (nutrient_value != undefined){
+          total += (entry.amount * gramweight * entry.nutrient_value.find(nv => nv.nutrNo === nutrientNumber).nutrVal) / 100;
+        }
+      })
+    }
+    return Math.round(total);
+  }
+
+  calculatePercentage(nutrientNumber, rda) {
+    let total = this.calculateTotal(nutrientNumber);
+    return Math.round((total / rda) * 100);
+  }
+
+  calculateWeight() {
+    let total = 0
+    if (this.daysJournalEntries.length > 0) {
+      this.daysJournalEntries.forEach(function (entry) {
+        total += +entry.measurement.find(m => m.seq === entry.seq).gramweight;
+      })
+    }
+    return total;
+  }
+
+  calculateCaloriesFrom(nutrientNumber){
+    let calories = this.calculateTotal(208);
+    let nutrientTotal = this.calculateTotal(nutrientNumber)
+    let caloriesFromNutrient = 0;
+    if(nutrientNumber === 203 || nutrientNumber === 205){
+      caloriesFromNutrient = nutrientTotal * 4;
+    } else if (nutrientNumber === 204){
+      caloriesFromNutrient = nutrientTotal * 9;
+    }
+    return Math.round((caloriesFromNutrient / calories) * 100);
   }
 
   toggleSugars() {

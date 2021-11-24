@@ -1,3 +1,9 @@
-.logout-button {
+.nav-button {
   color: white;
+  outline:none;
+  border: none;
+}
+
+nav.navbar.navbar-expand-md.navbar-dark.bg-dark {
+  margin-bottom: 20px;
 }

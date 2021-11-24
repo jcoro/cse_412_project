@@ -2,3 +2,15 @@
   color: red;
   font-size: 14px;
 }
+
+.btn-primary {
+  background-color: #970C10;
+  outline:none;
+  border: none;
+}
+
+.btn-link {
+  color: #970C10;
+  outline:none;
+  border: none;
+}

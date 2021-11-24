@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
     }, 50000);
   }
 
-
   logout() {
     this.authService.logout();
     this.router.navigateByUrl('/login');
@@ -31,5 +30,9 @@ export class AppComponent implements OnInit {
 
   isLoggedIn() {
     return this.authService.isLoggedIn();
+  }
+
+  getRoute(){
+    return this.router.url;
   }
 }

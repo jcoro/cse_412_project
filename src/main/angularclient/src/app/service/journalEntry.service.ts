@@ -10,7 +10,8 @@ export class JournalEntryService {
 
   private journalEntryUrl: string = 'http://localhost:8082/api/journalentries';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   public findAllByUsername(username: string): Observable<Array<JournalEntryResponse>> {
     return this.http.get<Array<JournalEntryResponse>>(this.journalEntryUrl + '/' + username);

@@ -21,6 +21,7 @@ import {CommonModule} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {AboutComponent} from "./about/about.component";
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
   declarations: [
     AppComponent,
     JournalComponent,
+    AboutComponent,
     LoginComponent,
     SignupComponent,
     UserListComponent,
