@@ -7,6 +7,7 @@ import {JournalEntry, JournalEntryResponse, JournalEntryUpdate} from "../model/j
 import {AuthService} from "../service/auth.service";
 import {FoodGroupService} from "../service/foodgroup.service";
 import {FormControl} from "@angular/forms";
+import {CdkDragDrop, CdkDragStart, moveItemInArray} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'journal',
@@ -101,7 +102,12 @@ export class JournalComponent {
         date1.getDate() === date2.getDate()){
         this.daysJournalEntries.push(e);
       }
-    })
+    });
+    this.daysJournalEntries.sort((firstEntry, secondEntry) =>
+    {
+      const res = firstEntry.order_index - secondEntry.order_index
+      return res === 0 ? this.getCaloriesWithEntry(firstEntry) - this.getCaloriesWithEntry(secondEntry) : res;
+    });
   }
 
   selectFood(food) {
@@ -147,7 +153,26 @@ export class JournalComponent {
     this.journalEntries[this.journalEntries.indexOf(this.journalEntries.find(e => e.j_id === entry.j_id))].seq = +event.target.value;
     this.editJournalEntry(entry);
   }
-
+  started(event: CdkDragStart<any>){}
+  drop(event: CdkDragDrop<String[]>) {
+    const oldIndex = event.previousIndex;
+    const newIndex = event.currentIndex;
+    const currentOrderIndex = this.daysJournalEntries[newIndex].order_index;
+    if (newIndex > oldIndex) {
+      for (let i = newIndex; i >= oldIndex; i--) {
+        this.daysJournalEntries[i].order_index = (i === oldIndex) ?
+          currentOrderIndex : this.daysJournalEntries[i - 1].order_index;
+        this.editJournalEntry(this.daysJournalEntries[i]);
+      }
+    } else if (newIndex < oldIndex) {
+      for (let i = newIndex; i <= oldIndex; i++) {
+        this.daysJournalEntries[i].order_index = (i === oldIndex) ?
+          currentOrderIndex : this.daysJournalEntries[i + 1].order_index;
+        this.editJournalEntry(this.daysJournalEntries[i]);
+      }
+    }
+    moveItemInArray(this.daysJournalEntries, oldIndex, newIndex);
+  }
   editJournalEntry(updatedEntry) {
     const entry: JournalEntryUpdate = {
       j_id: updatedEntry.j_id,
@@ -194,6 +219,11 @@ export class JournalComponent {
       let gramweight = +this.daysJournalEntries[i].measurement.find(m => m.seq === this.daysJournalEntries[i].seq).gramweight;
       return Math.round((this.daysJournalEntries[i].amount * gramweight * this.daysJournalEntries[i].nutrient_value.find(nv => nv.nutrNo === 208).nutrVal) / 100);
     }
+  }
+
+  getCaloriesWithEntry(entry) {
+    let gramweight = +entry.measurement.find(m => m.seq === entry.seq).gramweight;
+    return Math.round((entry.amount * gramweight * entry.nutrient_value.find(nv => nv.nutrNo === 208).nutrVal) / 100);
   }
 
   calculateTotal(nutrientNumber) {
