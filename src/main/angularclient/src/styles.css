@@ -1,3 +1,15 @@
+.btn-primary {
+  background-color: #970C10;
+  outline:none;
+  border: none;
+}
+
+.btn-link {
+  color: #970C10;
+  outline:none;
+  border: none;
+}
+
 body {
   font-family: 'Open Sans Condensed', Arial, sans-serif;
   font-size: 14px;
