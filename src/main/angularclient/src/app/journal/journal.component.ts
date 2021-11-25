@@ -8,15 +8,17 @@ import {AuthService} from "../service/auth.service";
 import {FoodGroupService} from "../service/foodgroup.service";
 import {FormControl} from "@angular/forms";
 import {CdkDragDrop, CdkDragStart, moveItemInArray} from "@angular/cdk/drag-drop";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'journal',
   templateUrl: './journal.component.html',
+  providers: [DatePipe]
 })
 export class JournalComponent {
   faTimes = faTimes;
   selectedDate: Date = new Date(Date.now());
-  selectedDateString: string = this.selectedDate.toISOString().substring(0,10);
+  selectedDateString: string;
   searchText = '';
   selectedFoodGroup = new FormControl(0);
   foods: Food[];
@@ -33,7 +35,8 @@ export class JournalComponent {
   constructor(private FoodService: FoodService,
               private JournalEntryService: JournalEntryService,
               private authService: AuthService,
-              private foodGroupService: FoodGroupService) {
+              private foodGroupService: FoodGroupService,
+              private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
@@ -59,6 +62,7 @@ export class JournalComponent {
       console.log("ERROR fetching Journal Entries");
       console.log(error);
     });
+    this.selectedDateString = this.datePipe.transform(this.selectedDate, 'yyyy-MM-dd');
   }
 
   changeSelectedDate(value) {
