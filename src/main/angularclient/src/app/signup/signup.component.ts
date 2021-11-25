@@ -40,7 +40,6 @@ export class SignupComponent implements OnInit {
     }
     this.authService.signup(this.registerForm.getRawValue())
       .subscribe(data => {
-        console.log(data);
         this.router.navigate(['/login'],
           {queryParams: {registered: 'true'}});
       }, error => {

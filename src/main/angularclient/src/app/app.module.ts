@@ -22,6 +22,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {AboutComponent} from "./about/about.component";
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import {AboutComponent} from "./about/about.component";
     CommonModule,
     MatIconModule,
     MatFormFieldModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    DragDropModule
   ],
   declarations: [
     AppComponent,
