@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faTimes, faGripVertical} from '@fortawesome/free-solid-svg-icons';
 import {FoodService} from "../service/food.service";
 import {JournalEntryService} from "../service/journalEntry.service";
 import {Food} from "../model/food";
@@ -17,6 +17,7 @@ import {DatePipe} from "@angular/common";
 })
 export class JournalComponent {
   faTimes = faTimes;
+  faGripVertical = faGripVertical;
   selectedDate: Date = new Date(Date.now());
   selectedDateString: string;
   searchText = '';
@@ -56,7 +57,7 @@ export class JournalComponent {
     this.JournalEntryService.findAllByUsername(this.authService.getUserName()).subscribe(data => {
       if (data != null) {
         this.journalEntries.push(...data);
-        // this.getSelectedDaysJournalEntries()
+        this.getSelectedDaysJournalEntries();
       }
     }, error => {
       console.log("ERROR fetching Journal Entries");
@@ -157,7 +158,28 @@ export class JournalComponent {
     this.journalEntries[this.journalEntries.indexOf(this.journalEntries.find(e => e.j_id === entry.j_id))].seq = +event.target.value;
     this.editJournalEntry(entry);
   }
-  started(event: CdkDragStart<any>){}
+  started(event: CdkDragStart<any>){
+    let firstColumn = event.source.element.nativeElement.querySelector<HTMLElement>('.first-column');
+    firstColumn.style.width = '400px';
+    firstColumn.style.padding = '15px';
+
+    let amountColumn = event.source.element.nativeElement.querySelector<HTMLElement>('.amount-column');
+    amountColumn.style.width = '200px';
+    amountColumn.style.padding = '15px';
+    amountColumn.style.textAlign = 'center';
+    amountColumn.querySelector<HTMLElement>('input').style.width = '75px'
+
+    let unitColumn = event.source.element.nativeElement.querySelector<HTMLElement>('.unit-column');
+    unitColumn.style.width = '200px';
+    unitColumn.style.padding = '15px';
+    unitColumn.querySelector<HTMLElement>('select').style.width = '150px'
+
+    let lastColumn = event.source.element.nativeElement.querySelector<HTMLElement>('.last-column');
+    lastColumn.style.width = '100px';
+    lastColumn.style.padding = '15px';
+    lastColumn.style.textAlign = 'center';
+  }
+
   drop(event: CdkDragDrop<String[]>) {
     const oldIndex = event.previousIndex;
     const newIndex = event.currentIndex;
