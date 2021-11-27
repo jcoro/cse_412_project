@@ -94,14 +94,16 @@
                 <tr cdkDrag *ngFor="let entry of daysJournalEntries; let i=index" (cdkDragStarted)="started($event)">
                   <td class="first-column"
                       colspan="2">
-                    <fa-icon (click)="deleteEntry(entry)" class="delete-icon"
-                             [icon]="faTimes"></fa-icon>
-                    &nbsp; {{entry.long_desc}}</td>
-                  <td colspan="1">
+                    <fa-icon (click)="deleteEntry(entry)" class="delete-icon" [icon]="faTimes"></fa-icon>
+                    &nbsp;
+                    <fa-icon [icon]="faGripVertical"></fa-icon>
+                    &nbsp;
+                    {{entry.long_desc}}</td>
+                  <td colspan="1" class="amount-column">
                     <input class="entryAmountInput" type="number"
                            (change)="updateEntryAmount(entry, $event)" value="{{entry.amount}}">
                   </td>
-                  <td colspan="1">
+                  <td colspan="1" class="unit-column">
                     <select (change)="updateUnitMeasureSequence(entry, $event)">
                       <option *ngFor="let measure of entry.measurement"
                               [value]="measure.seq"
