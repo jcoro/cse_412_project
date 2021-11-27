@@ -159,15 +159,27 @@ export class JournalComponent {
     this.editJournalEntry(entry);
   }
   started(event: CdkDragStart<any>){
-    event.source.element.nativeElement.querySelector<HTMLElement>('.first-column').style.width = '400px';
-    event.source.element.nativeElement.querySelector<HTMLElement>('.first-column').style.padding = '15px';
-    event.source.element.nativeElement.querySelector<HTMLElement>('.amount-column').style.width = '200px';
-    event.source.element.nativeElement.querySelector<HTMLElement>('.amount-column').style.padding = '15px';
-    event.source.element.nativeElement.querySelector<HTMLElement>('.unit-column').style.width = '200px';
-    event.source.element.nativeElement.querySelector<HTMLElement>('.unit-column').style.padding = '15px';
-    event.source.element.nativeElement.querySelector<HTMLElement>('.last-column').style.width = '100px';
-    event.source.element.nativeElement.querySelector<HTMLElement>('.last-column').style.padding = '15px';
+    let firstColumn = event.source.element.nativeElement.querySelector<HTMLElement>('.first-column');
+    firstColumn.style.width = '400px';
+    firstColumn.style.padding = '15px';
+
+    let amountColumn = event.source.element.nativeElement.querySelector<HTMLElement>('.amount-column');
+    amountColumn.style.width = '200px';
+    amountColumn.style.padding = '15px';
+    amountColumn.style.textAlign = 'center';
+    amountColumn.querySelector<HTMLElement>('input').style.width = '75px'
+
+    let unitColumn = event.source.element.nativeElement.querySelector<HTMLElement>('.unit-column');
+    unitColumn.style.width = '200px';
+    unitColumn.style.padding = '15px';
+    unitColumn.querySelector<HTMLElement>('select').style.width = '150px'
+
+    let lastColumn = event.source.element.nativeElement.querySelector<HTMLElement>('.last-column');
+    lastColumn.style.width = '100px';
+    lastColumn.style.padding = '15px';
+    lastColumn.style.textAlign = 'center';
   }
+
   drop(event: CdkDragDrop<String[]>) {
     const oldIndex = event.previousIndex;
     const newIndex = event.currentIndex;

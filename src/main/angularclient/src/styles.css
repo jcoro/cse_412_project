@@ -156,14 +156,25 @@ table#foodlist.data :not(thead) tr .first-column {
 
 th.header-label.amount, table#foodlist.data :not(thead) tr .amount-column {
   width: 200px;
+  text-align: center;
+}
+
+table#foodlist.data :not(thead) tr .amount-column input {
+  width: 75px;
 }
 
 th.header-label.unit, th.header-label.amount, table#foodlist.data :not(thead) tr .unit-column {
   width: 200px;
+  text-align: center;
+}
+
+table#foodlist.data :not(thead) tr .unit-column select {
+  width: 150px;
 }
 
 th.header-label.calories, table#foodlist.data :not(thead) tr .last-column {
   width: 100px;
+  text-align: center;
 }
 
 table#foodlist.data :not(thead) tr .last-column {
